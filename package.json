@@ -1,5 +1,5 @@
 {
-  "name": "element-popper",
+  "name": "react-element-popper",
   "version": "0.9.0",
   "description": "",
   "main": "./build/index.js",
