@@ -108,17 +108,17 @@ function checkPosition(e, elementRef, popperRef, ref) {
     }
 
     if (
-      elementLeft + cornerHeight - eventLeft < 0
+      elementLeft + cornerWidth - eventLeft < 0
     ) {
-      x -= elementLeft + cornerHeight - eventLeft
+      x -= elementLeft + cornerWidth - eventLeft
 
       if (elementRight - eventLeft < 0) {
         x += elementRight - eventLeft
       }
     }
 
-    if (elementRight - cornerHeight + eventLeft > clientWidth) {
-      x -= elementRight - cornerHeight - clientWidth + eventLeft
+    if (elementRight - cornerWidth + eventLeft > clientWidth) {
+      x -= elementRight - cornerWidth - clientWidth + eventLeft
 
       if (elementLeft + eventLeft > clientWidth) {
         x += elementLeft - clientWidth + eventLeft
@@ -148,16 +148,16 @@ function checkPosition(e, elementRef, popperRef, ref) {
       mainPosition = "left"
     }
 
-    if (elementTop + cornerWidth - eventTop < 0) {
-      y -= elementTop + cornerWidth - eventTop
+    if (elementTop + cornerHeight - eventTop < 0) {
+      y -= elementTop + cornerHeight - eventTop
 
       if (elementBottom - eventTop < 0) {
         y += elementBottom - eventTop
       }
     }
 
-    if (elementBottom - cornerWidth - eventTop > eventHeight) {
-      y -= elementBottom - cornerWidth - (eventTop + eventHeight)
+    if (elementBottom - cornerHeight - eventTop > eventHeight) {
+      y -= elementBottom - cornerHeight - (eventTop + eventHeight)
 
       if (elementTop - eventTop > eventHeight) {
         y += elementTop - eventTop - eventHeight
