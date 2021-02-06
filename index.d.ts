@@ -58,6 +58,11 @@ declare module "react-element-popper" {
      * <DatePicker calendar="indian" />
      */
     position? : string,
+    /**
+     * default z-index = 0
+     */
+    zIndex:number,
+    popperShadow:boolean,
     onChange?(data:{
       popper: {
         top: number,

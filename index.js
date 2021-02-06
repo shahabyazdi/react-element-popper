@@ -12,6 +12,8 @@ function ElementPopper({
   offsetY,
   offsetX,
   animation,
+  zIndex = 0,
+  popperShadow,
   onChange
 },
   outerRef
@@ -31,6 +33,7 @@ function ElementPopper({
         offsetX,
         defaultArrow,
         animation,
+        zIndex,
         onChange
       }
     }, [position, fixMainPosition, fixRelativePosition, offsetY, offsetX, defaultArrow, animation, onChange])
@@ -94,11 +97,11 @@ function ElementPopper({
           )
         }
       }}
-      style={{ display: "inline-block", ...containerStyle }}
+      style={{ display: "inline-block", height: "max-content", ...containerStyle }}
     >
       {element}
       {arrow === true ?
-        <div ref={arrowRef} className="ep-arrow" style={{ ...defaultArrowStyle, ...arrowStyle }}></div> :
+        <div ref={arrowRef} className={`ep-arrow ${popperShadow ? "ep-shadow" : ""}`} style={{ ...defaultArrowStyle, ...arrowStyle }}></div> :
         isValidElement(arrow) ?
           <div ref={arrowRef} style={{ ...defaultArrowStyle, ...arrowStyle }}>
             {arrow}
@@ -111,7 +114,9 @@ function ElementPopper({
           left: "0",
           top: "0",
           willChange: "transform",
-          visibility: "hidden"
+          visibility: "hidden",
+          boxShadow: popperShadow ? "0 0 6px #becadb" : "",
+          zIndex
         }}
       >
         <div ref={popperRef}>{popper}</div>
@@ -134,6 +139,7 @@ function setPosition(
     offsetX = 0,
     defaultArrow,
     animation,
+    zIndex,
     onChange
   },
   e
@@ -363,6 +369,7 @@ function setPosition(
     arrow.style.transform = getTransform(arrowX, arrowY)
     arrow.setAttribute("direction", arrowDirection)
     arrow.style.visibility = "visible"
+    arrow.style.zIndex = zIndex + 1
   }
 
   popperContainer.style.transform = getTransform(x, y)
