@@ -2,7 +2,7 @@
   "name": "react-element-popper",
   "version": "1.0.0",
   "description": "",
-  "main": "./build/index.js",
+  "main": "./build/index.min.js",
   "types": "index.d.ts",
   "scripts": {
     "build": "rollup -c"

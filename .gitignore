@@ -1,3 +1,4 @@
 /node_modules
-/build
+/build/index.min.js
+/build/browser.min.js
 .npmignore

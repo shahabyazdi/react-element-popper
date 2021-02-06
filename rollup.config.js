@@ -23,7 +23,7 @@ export default [
     input: "index.js",
     output: [
       {
-        file: "build/index.js",
+        file: "build/index.min.js",
         format: "esm",
         plugins: [terser()],
         exports: "named"
