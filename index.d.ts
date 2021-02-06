@@ -2,6 +2,7 @@ declare module "react-element-popper" {
   import React from "react"
 
   interface ElementPopperProps{
+    ref?:React.RefObject<any>,
     /**
      * Refrence element
      */
