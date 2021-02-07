@@ -12,7 +12,8 @@
   transform: rotate(45deg);
 }
 
-.ep-arrow.ep-shadow::after {
+.ep-arrow.ep-shadow::after,
+.ep-popper-shadow {
   box-shadow: 0 0 6px#becadb;
 }
 
