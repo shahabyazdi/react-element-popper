@@ -48,7 +48,7 @@ declare module "react-element-popper" {
      *   - top-start or top-left
      *   - bottom-start or bottom-left
      *   - left-start or left-top
-     *   - right-start or righ-top
+     *   - right-start or right-top
      *   - top-end or top-right
      *   - bottom-end or bottom-right
      *   - left-end or left-bottom
@@ -62,8 +62,8 @@ declare module "react-element-popper" {
     /**
      * default z-index = 0
      */
-    zIndex:number,
-    popperShadow:boolean,
+    zIndex?:number,
+    popperShadow?:boolean,
     onChange?(data:{
       popper: {
         top: number,

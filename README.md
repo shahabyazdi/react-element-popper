@@ -12,6 +12,8 @@ npm install --save react-element-popper
 
 ```javascript
 import React from "react";
+import ElementPopper from "react-element-popper";
+import "react-element-popper/build/element_popper.css"; // arrow styles and shadow
 
 export default function Example() {
   const Component = ({ size, backgroundColor, children }) => {
@@ -80,7 +82,7 @@ export default function Example() {
 - `top-start` or `top-left`
 - `bottom-start` or `bottom-left`
 - `left-start` or `left-top`
-- `right-start` or `righ-top`
+- `right-start` or `right-top`
 - `top-end` or `top-right`
 - `bottom-end` or `bottom-right`
 - `left-end` or `left-bottom`

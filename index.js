@@ -109,13 +109,13 @@ function ElementPopper({
           null
       }
       <div
+        className={popperShadow ? "ep-popper-shadow" : ""}
         style={{
           position: "absolute",
           left: "0",
           top: "0",
           willChange: "transform",
           visibility: "hidden",
-          boxShadow: popperShadow ? "0 0 6px #becadb" : "",
           zIndex
         }}
       >
@@ -152,7 +152,7 @@ function setPosition(
     { clientHeight, clientWidth } = document.documentElement,
     popperContainer = popperRef.current.parentNode,
     [translateX, translateY] = getTranslate(popperContainer),
-    [mainPosition, relativePosition, vertical, horizontal] = exportPosition(position),
+    [mainPosition, relativePosition, vertical, horizontal] = splitPosition(position),
     currentMainPosition = mainPosition,
     getTransform = (x, y) => `translate(${x}px, ${y}px)`,
     lengthDifference = elementWidth - popperWidth,
@@ -174,17 +174,16 @@ function setPosition(
     arrowY = (elementTop - arrowTop) + translateArrowY,
     arrowDistanceX,
     arrowDistanceY,
+    arrowDirection,
+    mirror = { top: "bottom", bottom: "top", left: "right", right: "left" },
     animationX = 0,
     animationY = 0
-
-  if (mainPosition === "auto") mainPosition = "bottom"
-  if (relativePosition === "auto") relativePosition = "center"
 
   if (vertical) {
     x += leftCorner
     y += mainPosition === "top" ? -popperHeight : elementHeight
 
-    if (arrow && defaultArrow) {
+    if (defaultArrow) {
       arrowHeight = 11
       arrowWidth = 20
     }
@@ -194,7 +193,7 @@ function setPosition(
     x += mainPosition === "left" ? -popperWidth : elementWidth
     y += topCorner
 
-    if (arrow && defaultArrow) {
+    if (defaultArrow) {
       arrowHeight = 20
       arrowWidth = 11
     }
@@ -243,15 +242,15 @@ function setPosition(
 
       if (!fixRelativePosition) {
         if (elementLeft + leftCorner < left) {
-          distanceX = getDistance(
+          distanceX = getMaxDistance(
             elementRight - arrowWidth > left ? (elementLeft + leftCorner - left) : (-elementWidth + leftCorner + arrowWidth),
             distanceX
           )
         }
 
         if (elementRight - rightCorner > right) {
-          distanceX = getDistance(
-            elementLeft + arrowWidth < right ? elementRight - rightCorner - right : (elementWidth - rightCorner - arrowWidth),
+          distanceX = getMaxDistance(
+            elementLeft + arrowWidth < right ? (elementRight - rightCorner - right) : (elementWidth - rightCorner - arrowWidth),
             distanceX
           )
         }
@@ -284,15 +283,15 @@ function setPosition(
 
       if (!fixRelativePosition) {
         if (elementTop + topCorner < top) {
-          distanceY = getDistance(
-            elementBottom - arrowHeight > top ? elementTop + topCorner - top : (-elementHeight + topCorner + arrowHeight),
+          distanceY = getMaxDistance(
+            elementBottom - arrowHeight > top ? (elementTop + topCorner - top) : (-elementHeight + topCorner + arrowHeight),
             distanceY
           )
         }
 
         if (elementBottom - bottomCorner > bottom) {
-          distanceY = getDistance(
-            elementTop + arrowHeight < bottom ? elementBottom - bottomCorner - bottom : (elementHeight - bottomCorner - arrowHeight),
+          distanceY = getMaxDistance(
+            elementTop + arrowHeight < bottom ? (elementBottom - bottomCorner - bottom) : (elementHeight - bottomCorner - arrowHeight),
             distanceY
           )
         }
@@ -302,14 +301,16 @@ function setPosition(
 
   if (vertical) y += currentMainPosition === "bottom" ? offsetY : -offsetY
   if (horizontal) x += currentMainPosition === "right" ? offsetX : -offsetX
-  if (animation && vertical && !e) animationY = currentMainPosition === "bottom" ? 10 : -10
-  if (animation && horizontal && !e) animationX = currentMainPosition === "right" ? 10 : -10
+
+  if (animation && !e) {
+    if (vertical) animationY = currentMainPosition === "bottom" ? 10 : -10
+    if (horizontal) animationX = currentMainPosition === "right" ? 10 : -10
+  }
 
   x = x - distanceX + animationX
   y = y - distanceY + animationY
 
-  let mirror = { top: "bottom", bottom: "top", left: "right", right: "left" }
-  let arrowDirection = mirror[currentMainPosition]
+  arrowDirection = mirror[currentMainPosition]
 
   if (arrow) {
     if (distanceX - leftCorner < 0) {
@@ -364,10 +365,10 @@ function setPosition(
       }
     }
 
+    arrow.setAttribute("direction", arrowDirection)
     arrow.style.height = arrowHeight + "px"
     arrow.style.width = arrowWidth + "px"
     arrow.style.transform = getTransform(arrowX, arrowY)
-    arrow.setAttribute("direction", arrowDirection)
     arrow.style.visibility = "visible"
     arrow.style.zIndex = zIndex + 1
   }
@@ -415,7 +416,8 @@ function setPosition(
         direction: arrowDirection
       },
       position: currentMainPosition + "-" + (distanceX !== 0 ? "auto" : relativePosition),
-      scroll: { scrollLeft, scrollTop }
+      scroll: { scrollLeft, scrollTop },
+      event: e
     })
   }
 }
@@ -470,10 +472,13 @@ function getScrollableParent(element) {
   return getScrollableParent(element.parentNode)
 }
 
-function exportPosition(position) {
+function splitPosition(position) {
   let [mainPosition = "bottom", relativePosition = "center"] = position.split("-"),
     vertical = mainPosition === "top" || mainPosition === "bottom",
     horizontal = mainPosition === "left" || mainPosition === "right"
+
+  if (mainPosition === "auto") mainPosition = "bottom"
+  if (relativePosition === "auto") relativePosition = "center"
 
   if (horizontal) {
     if (relativePosition === "start") relativePosition = "top"
@@ -488,7 +493,7 @@ function exportPosition(position) {
   return [mainPosition, relativePosition, vertical, horizontal]
 }
 
-function getDistance(currentDistance, previousDistance) {
+function getMaxDistance(currentDistance, previousDistance) {
   if (Math.round(Math.abs(currentDistance)) > Math.round(Math.abs(previousDistance))) {
     return currentDistance
   }
