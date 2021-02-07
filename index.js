@@ -16,7 +16,8 @@ function ElementPopper({
   animation,
   zIndex = 0,
   popperShadow,
-  onChange
+  onChange,
+  active = true
 },
   outerRef
 ) {
@@ -25,7 +26,7 @@ function ElementPopper({
     arrowRef = useRef(),
     defaultArrowStyle = { visibility: "hidden", left: "0", top: "0", position: "absolute" },
     defaultArrow = useMemo(() => arrow === true, [arrow]),
-    isPopper = useMemo(() => popper ? true : false, [popper]),
+    isPopper = useMemo(() => popper && active === true, [popper, active]),
     getOptions = useCallback(() => {
       return {
         position,
@@ -40,8 +41,8 @@ function ElementPopper({
       }
     }, [position, fixMainPosition, fixRelativePosition, offsetY, offsetX, defaultArrow, animation, onChange, zIndex]),
     removeTransition = useCallback(() => {
-      if (arrowRef.current) arrowRef.current.style.transition = "none"
-      if (popperRef.current) popperRef.current.parentNode.style.transition = "none"
+      if (arrowRef.current) arrowRef.current.style.transition = ""
+      if (popperRef.current) popperRef.current.parentNode.style.transition = ""
     }, [])
 
   useEffect(() => {
@@ -86,32 +87,34 @@ function ElementPopper({
   return (
     <div
       ref={element => {
-        elementRef.current = element
-
-        if (outerRef) outerRef.current = element
-
-        if (outerRef?.current) {
-          outerRef.current.removeTransition = removeTransition
-          outerRef.current.refreshPosition = () => setTimeout(() => setPosition(
+        if (element) {
+          element.removeTransition = removeTransition
+          element.refreshPosition = () => setTimeout(() => setPosition(
             elementRef,
             popperRef,
             arrowRef,
-            getOptions()
+            getOptions(),
+            {} //To prevent animation
           ), 10)
         }
+
+        elementRef.current = element
+
+        if (outerRef instanceof Function) return outerRef(element)
+        if (outerRef) outerRef.current = element
       }}
       className={containerClassName}
       style={{ display: "inline-block", height: "max-content", ...containerStyle }}
     >
       {element}
-      {arrow === true && popper ?
+      {arrow === true && isPopper ?
         <div
           ref={arrowRef}
           className={`ep-arrow ${popperShadow ? "ep-shadow" : ""} ${arrowClassName}`}
           style={{ ...defaultArrowStyle, ...arrowStyle }}
         >
         </div> :
-        isValidElement(arrow) ?
+        isValidElement(arrow) && isPopper ?
           <div ref={arrowRef} style={{ ...defaultArrowStyle, ...arrowStyle }}>
             {arrow}
           </div> :

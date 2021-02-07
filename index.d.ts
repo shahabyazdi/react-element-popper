@@ -30,9 +30,12 @@ declare module "react-element-popper" {
      *  arrow={<ArrowComponent/>}
      * />
      */
+    active?:boolean,
     arrow?: boolean | React.ReactElement,
     containerStyle?: React.CSSProperties,
+    containerClassName?: string,
     arrowStyle?: React.CSSProperties,
+    arrowClassName?: string,
     fixMainPosition?: boolean,
     fixRelativePosition?: boolean,
     offsetY?: number,

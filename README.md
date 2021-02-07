@@ -1,6 +1,8 @@
 # ElementPopper
 
-![ElementPopper](/screenshot/screenshot.jpg?raw=true)
+<div align="center">
+  <img src="https://github.com/shahabyazdi/react-element-popper/blob/master/screenshot/screenshot.jpg?raw=true" alt="Element Popper"/>
+</div>
 
 ## Installation
 
@@ -57,21 +59,24 @@ export default function Example() {
 
 | Name                |        Type         |     Default     |
 | ------------------- | :-----------------: | :-------------: |
-| element             | React.ReactElement  |    undefined    |
-| popper              | React.ReactElement  |    undefined    |
+| element             | React.ReactElement  |                 |
+| popper              | React.ReactElement  |                 |
 | position            |       String        | "bottom-center" |
 | arrow               |       Boolean       |      false      |
 | fixMainPosition     |       Boolean       |      false      |
 | fixRelativePosition |       Boolean       |      false      |
 | animation           |       Boolean       |      false      |
 | popperShadow        |       Boolean       |      false      |
+| active              |       Boolean       |      true       |
 | offsetY             |       Number        |        0        |
 | offsetX             |       Number        |        0        |
 | zIndex              |       Number        |        0        |
 | containerStyle      | React.CSSProperties |                 |
 | arrowStyle          | React.CSSProperties |                 |
-| ref                 |   React.RefObject   |    undefined    |
-| onChange            |      Function       |    undefined    |
+| containerClassName  |       String        |                 |
+| arrowClassName      |       String        |                 |
+| ref                 |   React.RefObject   |                 |
+| onChange            |      Function       |                 |
 
 ## Availble Positions
 
