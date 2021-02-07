@@ -5,8 +5,10 @@ function ElementPopper({
   popper,
   position = "bottom-center",
   containerStyle,
+  containerClassName = "",
   arrow,
   arrowStyle = {},
+  arrowClassName = "",
   fixMainPosition,
   fixRelativePosition,
   offsetY,
@@ -36,7 +38,11 @@ function ElementPopper({
         zIndex,
         onChange
       }
-    }, [position, fixMainPosition, fixRelativePosition, offsetY, offsetX, defaultArrow, animation, onChange])
+    }, [position, fixMainPosition, fixRelativePosition, offsetY, offsetX, defaultArrow, animation, onChange, zIndex]),
+    removeTransition = useCallback(() => {
+      if (arrowRef.current) arrowRef.current.style.transition = "none"
+      if (popperRef.current) popperRef.current.parentNode.style.transition = "none"
+    }, [])
 
   useEffect(() => {
     if (!isPopper) {
@@ -64,11 +70,6 @@ function ElementPopper({
       )
     }
 
-    function removeTransition() {
-      if (arrowRef.current) arrowRef.current.style.transition = "none"
-      if (popperRef.current) popperRef.current.parentNode.style.transition = "none"
-    }
-
     document.addEventListener("scroll", updatePosition, true)
     window.addEventListener("resize", updatePosition)
 
@@ -78,7 +79,8 @@ function ElementPopper({
     }
   }, [
     isPopper,
-    getOptions
+    getOptions,
+    removeTransition
   ])
 
   return (
@@ -89,19 +91,26 @@ function ElementPopper({
         if (outerRef) outerRef.current = element
 
         if (outerRef?.current) {
-          outerRef.current.refreshPosition = () => setPosition(
+          outerRef.current.removeTransition = removeTransition
+          outerRef.current.refreshPosition = () => setTimeout(() => setPosition(
             elementRef,
             popperRef,
             arrowRef,
             getOptions()
-          )
+          ), 10)
         }
       }}
+      className={containerClassName}
       style={{ display: "inline-block", height: "max-content", ...containerStyle }}
     >
       {element}
-      {arrow === true ?
-        <div ref={arrowRef} className={`ep-arrow ${popperShadow ? "ep-shadow" : ""}`} style={{ ...defaultArrowStyle, ...arrowStyle }}></div> :
+      {arrow === true && popper ?
+        <div
+          ref={arrowRef}
+          className={`ep-arrow ${popperShadow ? "ep-shadow" : ""} ${arrowClassName}`}
+          style={{ ...defaultArrowStyle, ...arrowStyle }}
+        >
+        </div> :
         isValidElement(arrow) ?
           <div ref={arrowRef} style={{ ...defaultArrowStyle, ...arrowStyle }}>
             {arrow}
@@ -473,12 +482,13 @@ function getScrollableParent(element) {
 }
 
 function splitPosition(position) {
-  let [mainPosition = "bottom", relativePosition = "center"] = position.split("-"),
-    vertical = mainPosition === "top" || mainPosition === "bottom",
-    horizontal = mainPosition === "left" || mainPosition === "right"
+  let [mainPosition = "bottom", relativePosition = "center"] = position.split("-")
 
   if (mainPosition === "auto") mainPosition = "bottom"
   if (relativePosition === "auto") relativePosition = "center"
+
+  let vertical = mainPosition === "top" || mainPosition === "bottom",
+    horizontal = mainPosition === "left" || mainPosition === "right"
 
   if (horizontal) {
     if (relativePosition === "start") relativePosition = "top"
