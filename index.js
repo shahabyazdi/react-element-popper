@@ -325,25 +325,25 @@ function setPosition(
   arrowDirection = mirror[currentMainPosition]
 
   if (arrow) {
-    if (distanceX - leftCorner < 0) {
+    if (distanceX && distanceX - leftCorner < 0) {
       arrowDistanceX = (x - elementLeft) / 2
 
       arrowX += arrowDistanceX < 0 ? 0 : arrowDistanceX
     }
 
-    if (distanceX + rightCorner > 0) {
+    if (distanceX && distanceX + rightCorner > 0) {
       arrowDistanceX = ((x + popperWidth) - elementRight) / 2
 
       arrowX += arrowDistanceX > 0 ? 0 : arrowDistanceX
     }
 
-    if (distanceY - topCorner < 0) {
+    if (distanceY && distanceY - topCorner < 0) {
       arrowDistanceY = (y - elementTop) / 2
 
       arrowY += arrowDistanceY < 0 ? 0 : arrowDistanceY
     }
 
-    if (distanceY + bottomCorner > 0) {
+    if (distanceY && distanceY + bottomCorner > 0) {
       arrowDistanceY = ((y + popperHeight) - elementBottom) / 2
 
       arrowY += arrowDistanceY > 0 ? 0 : arrowDistanceY
