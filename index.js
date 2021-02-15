@@ -160,7 +160,7 @@ function setPosition(
 
   let { scrollLeft, scrollTop } = getScroll(),
     { top: elementTop, left: elementLeft, height: elementHeight, width: elementWidth, right: elementRight, bottom: elementBottom } = getPosition(elementRef.current, scrollLeft, scrollTop),
-    { top: popperTop, left: popperLeft, height: popperHeight, width: popperWidth } = getPosition(popperRef.current, scrollLeft, scrollTop),
+    { top: popperTop, left: popperLeft, height: popperHeight, width: popperWidth, right: popperRight, bottom: popperBottom } = getPosition(popperRef.current, scrollLeft, scrollTop),
     { clientHeight, clientWidth } = document.documentElement,
     popperContainer = popperRef.current.parentNode,
     [translateX, translateY] = getTranslate(popperContainer),
@@ -182,10 +182,8 @@ function setPosition(
     arrow = arrowRef.current,
     [translateArrowX, translateArrowY] = getTranslate(arrow),
     { left: arrowLeft, top: arrowTop, height: arrowHeight = 0, width: arrowWidth = 0 } = getPosition(arrow, scrollLeft, scrollTop) || {},
-    arrowX = (elementLeft - arrowLeft) + translateArrowX,
-    arrowY = (elementTop - arrowTop) + translateArrowY,
-    arrowDistanceX,
-    arrowDistanceY,
+    arrowX,
+    arrowY,
     arrowDirection,
     mirror = { top: "bottom", bottom: "top", left: "right", right: "left" },
     animationX = 0,
@@ -325,32 +323,22 @@ function setPosition(
   arrowDirection = mirror[currentMainPosition]
 
   if (arrow) {
-    if (distanceX && distanceX - leftCorner < 0) {
-      arrowDistanceX = (x - elementLeft) / 2
-
-      arrowX += arrowDistanceX < 0 ? 0 : arrowDistanceX
-    }
-
-    if (distanceX && distanceX + rightCorner > 0) {
-      arrowDistanceX = ((x + popperWidth) - elementRight) / 2
-
-      arrowX += arrowDistanceX > 0 ? 0 : arrowDistanceX
-    }
-
-    if (distanceY && distanceY - topCorner < 0) {
-      arrowDistanceY = (y - elementTop) / 2
-
-      arrowY += arrowDistanceY < 0 ? 0 : arrowDistanceY
-    }
-
-    if (distanceY && distanceY + bottomCorner > 0) {
-      arrowDistanceY = ((y + popperHeight) - elementBottom) / 2
-
-      arrowY += arrowDistanceY > 0 ? 0 : arrowDistanceY
-    }
+    let halfLeft = (popperLeft - elementLeft) / 2,
+      halfRight = (popperRight - elementRight) / 2,
+      halfTop = (popperTop - elementTop) / 2,
+      halfBottom = (popperBottom - elementBottom) / 2,
+      isElementSmaller
 
     if (vertical) {
-      arrowX += (elementWidth / 2) - (arrowWidth / 2)
+      isElementSmaller = elementWidth < popperWidth
+
+      if (isElementSmaller) {
+        arrowX = ((elementLeft - arrowLeft) + translateArrowX) + (elementWidth / 2)
+      } else {
+        arrowX = (x + (popperWidth / 2))
+      }
+
+      arrowX -= (arrowWidth / 2)
 
       if (currentMainPosition === "bottom") {
         arrowY = y
@@ -361,10 +349,34 @@ function setPosition(
         y -= arrowHeight
         arrowY = y + popperHeight
       }
+
+      if (distanceX && distanceX - leftCorner < 0) {
+        if (isElementSmaller) {
+          arrowX += halfLeft < 0 ? 0 : halfLeft
+        } else {
+          arrowX -= halfRight < 0 ? 0 : halfRight
+        }
+      }
+
+      if (distanceX && distanceX + rightCorner > 0) {
+        if (isElementSmaller) {
+          arrowX += halfRight > 0 ? 0 : halfRight
+        } else {
+          arrowX -= halfLeft > 0 ? 0 : halfLeft
+        }
+      }
     }
 
     if (horizontal) {
-      arrowY += (elementHeight / 2) - (arrowHeight / 2)
+      isElementSmaller = elementHeight < popperHeight
+
+      if (isElementSmaller) {
+        arrowY = ((elementTop - arrowTop) + translateArrowY) + (elementHeight / 2)
+      } else {
+        arrowY = (y + (popperHeight / 2))
+      }
+
+      arrowY -= (arrowHeight / 2)
 
       if (currentMainPosition === "left") {
         x -= arrowWidth
@@ -374,6 +386,22 @@ function setPosition(
       if (currentMainPosition === "right") {
         arrowX = x
         x += arrowWidth
+      }
+
+      if (distanceY && distanceY - topCorner < 0) {
+        if (isElementSmaller) {
+          arrowY += halfTop < 0 ? 0 : halfTop
+        } else {
+          arrowY -= halfBottom < 0 ? 0 : halfBottom
+        }
+      }
+
+      if (distanceY && distanceY + bottomCorner > 0) {
+        if (isElementSmaller) {
+          arrowY += halfBottom > 0 ? 0 : halfBottom
+        } else {
+          arrowY -= halfTop > 0 ? 0 : halfTop
+        }
       }
     }
 
@@ -477,8 +505,8 @@ function getScrollableParent(element) {
   if (!element || element.tagName === "HTML") return
 
   if (
-    element.clientHeight < element.offsetHeight ||
-    element.clientWidth < element.offsetWidth
+    element.clientHeight < element.scrollHeight ||
+    element.clientWidth < element.scrollWidth
   ) return element
 
   return getScrollableParent(element.parentNode)
