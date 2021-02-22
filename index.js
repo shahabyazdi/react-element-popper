@@ -323,10 +323,10 @@ function setPosition(
   arrowDirection = mirror[currentMainPosition]
 
   if (arrow) {
-    let halfLeft = (popperLeft - elementLeft) / 2,
-      halfRight = (popperRight - elementRight) / 2,
-      halfTop = (popperTop - elementTop) / 2,
-      halfBottom = (popperBottom - elementBottom) / 2,
+    let halfLeft = (x - elementLeft) / 2,
+      halfRight = ((x + popperWidth) - elementRight) / 2,
+      halfTop = (y - elementTop) / 2,
+      halfBottom = ((y + popperHeight) - elementBottom) / 2,
       isElementSmaller
 
     if (vertical) {
