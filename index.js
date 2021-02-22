@@ -160,7 +160,7 @@ function setPosition(
 
   let { scrollLeft, scrollTop } = getScroll(),
     { top: elementTop, left: elementLeft, height: elementHeight, width: elementWidth, right: elementRight, bottom: elementBottom } = getPosition(elementRef.current, scrollLeft, scrollTop),
-    { top: popperTop, left: popperLeft, height: popperHeight, width: popperWidth } = getPosition(popperRef.current, scrollLeft, scrollTop),
+    { top: popperTop, left: popperLeft, height: popperHeight, width: popperWidth, right: popperRight, bottom: popperBottom } = getPosition(popperRef.current, scrollLeft, scrollTop),
     { clientHeight, clientWidth } = document.documentElement,
     popperContainer = popperRef.current.parentNode,
     [translateX, translateY] = getTranslate(popperContainer),
@@ -323,10 +323,10 @@ function setPosition(
   arrowDirection = mirror[currentMainPosition]
 
   if (arrow) {
-    let halfLeft = (x - elementLeft) / 2,
-      halfRight = ((x + popperWidth) - elementRight) / 2,
-      halfTop = (y - elementTop) / 2,
-      halfBottom = ((y + popperHeight) - elementBottom) / 2,
+    let halfLeft = (popperLeft - elementLeft) / 2,
+      halfRight = (popperRight - elementRight) / 2,
+      halfTop = (popperTop - elementTop) / 2,
+      halfBottom = (popperBottom - elementBottom) / 2,
       isElementSmaller
 
     if (vertical) {
