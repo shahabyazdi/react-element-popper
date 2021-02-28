@@ -24,7 +24,13 @@ export default [
     output: [
       {
         file: "build/index.min.js",
-        format: "esm",
+        format: "cjs",
+        plugins: [terser()],
+        exports: "named"
+      },
+      {
+        file: "build/index.module.js",
+        format: "es",
         plugins: [terser()],
         exports: "named"
       },
@@ -33,7 +39,7 @@ export default [
         format: "umd",
         plugins: [terser()],
         name: "ElementPopper",
-        exports: "named",
+        exports: "default",
         globals
       }
     ],
