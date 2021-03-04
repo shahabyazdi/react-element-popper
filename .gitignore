@@ -1,5 +1,7 @@
 /node_modules
 website/node_modules
+website/public
+website/.cache
 /build/index.min.js
 /build/index.module.js
 /build/browser.min.js
