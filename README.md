@@ -57,26 +57,26 @@ export default function Example() {
 
 ## Availble props
 
-| Name                |        Type         |     Default     |
-| ------------------- | :-----------------: | :-------------: |
-| element             | React.ReactElement  |                 |
-| popper              | React.ReactElement  |                 |
-| position            |       String        | "bottom-center" |
-| arrow               |       Boolean       |      false      |
-| fixMainPosition     |       Boolean       |      false      |
-| fixRelativePosition |       Boolean       |      false      |
-| animation           |       Boolean       |      false      |
-| popperShadow        |       Boolean       |      false      |
-| active              |       Boolean       |      true       |
-| offsetY             |       Number        |        0        |
-| offsetX             |       Number        |        0        |
-| zIndex              |       Number        |        0        |
-| containerStyle      | React.CSSProperties |                 |
-| arrowStyle          | React.CSSProperties |                 |
-| containerClassName  |       String        |                 |
-| arrowClassName      |       String        |                 |
-| ref                 |   React.RefObject   |                 |
-| onChange            |      Function       |                 |
+| Name                |             Type              |     Default     |
+| ------------------- | :---------------------------: | :-------------: |
+| element             |      React.ReactElement       |                 |
+| popper              |      React.ReactElement       |                 |
+| position            |            String             | "bottom-center" |
+| arrow               | Boolean or React.ReactElement |      false      |
+| fixMainPosition     |            Boolean            |      false      |
+| fixRelativePosition |            Boolean            |      false      |
+| animation           |            Boolean            |      false      |
+| popperShadow        |            Boolean            |      false      |
+| active              |            Boolean            |      true       |
+| offsetY             |            Number             |        0        |
+| offsetX             |            Number             |        0        |
+| zIndex              |            Number             |        0        |
+| containerStyle      |      React.CSSProperties      |                 |
+| arrowStyle          |      React.CSSProperties      |                 |
+| containerClassName  |            String             |                 |
+| arrowClassName      |            String             |                 |
+| ref                 |        React.RefObject        |                 |
+| onChange            |           Function            |                 |
 
 ## Availble Positions
 
