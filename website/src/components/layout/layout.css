@@ -403,3 +403,7 @@ pre {
   box-sizing: border-box;
   height: 26px;
 }
+
+.input:disabled {
+  background-color: #f0efef;
+}
