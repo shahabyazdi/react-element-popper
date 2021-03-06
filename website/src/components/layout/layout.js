@@ -19,7 +19,9 @@ const sidebar = {
   default: [
     { name: "Home", path: "" },
     { name: "Installation & Usage", path: "installation/" },
-    { name: "Props", path: "props/" },
+    { name: "Props & Positions", path: "props/" },
+    { name: "Creating DropDown", path: "dropdown/" },
+    { name: "Nested DropDown", path: "nested-dropdown/" },
   ]
 }
 
@@ -103,13 +105,13 @@ export default function Layout({ language, doc, section }) {
     })
   }
 
-  function Code({ title, children }) {
+  function Code({ title, children, language = "jsx" }) {
     useEffect(() => Prism.highlightAll(), [children])
 
     return (
       <>
         {title && <p>{translate(title)}</p>}
-        <pre><code className="language-jsx">{children}</code></pre>
+        <pre><code className={"language-" + language}>{children}</code></pre>
       </>
     )
   }

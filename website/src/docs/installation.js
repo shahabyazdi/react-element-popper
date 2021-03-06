@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function (translate) {
+export default function (translate, language, Code) {
   const npm = {
     title: "npm",
     description: translate("npm_description"),
@@ -13,53 +13,47 @@ export default function (translate) {
     code: `yarn add react-element-popper`
   }
 
+  const basicImport = {
+    title: "Basic Import",
+    description: "basic_import",
+    code: `import ElementPopper from "react-element-popper"`,
+    jsx: <>
+      <Code title="basic_import2">
+        import "react-element-popper/build/element_popper.css"
+      </Code>
+    </>,
+  }
+
   const usage = {
     title: "Usage",
-    code: `import React from "react";
-import ElementPopper from "react-element-popper";
-import "react-element-popper/build/element_popper.css"; // arrow styles and shadow
+    code: `import React from "react"
+import ElementPopper from "react-element-popper"
 
 export default function Example() {
-  const Component = ({ size, backgroundColor, children }) => {
-    return (
-      <div
-        style={{
-          width: size + "px",
-          height: size + "px",
-          backgroundColor,
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        {children}
-      </div>
-    );
-  };
+  const Div = ({ children }) => (
+    <div
+      style={{
+        border: "1px solid black",
+        backgroundColor: "white"
+      }}
+    >
+      { children}
+    </div>
+  )
 
   return (
     <ElementPopper
-      element={
-        <Component size="80" backgroundColor="red">
-          Refrence Element
-        </Component>
-      }
-      popper={
-        <Component size="100" backgroundColor="white">
-          Popper Element
-        </Component>
-      }
-      arrow
-      popperShadow
+      element={<Div>Refrence Element</Div>}
+      popper={<Div>Popper Element</Div>}
     />
-  );
+  )
 }`
   }
 
   return [
     npm,
     yarn,
+    basicImport,
     usage
   ]
 }

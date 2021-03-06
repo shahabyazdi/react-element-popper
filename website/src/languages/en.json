@@ -1,4 +1,23 @@
 {
   "npm_description": "",
-  "yarn_description": ""
+  "yarn_description": "",
+  "basic_import": "In most cases, importing ElementPoper alone is enough.",
+  "basic_import2": "If you want to enable built-in arrow or popper shadow, you need to import the style as well:",
+  "demo_descriptions": [
+    "React Element Popper is used to create menus, nested menus, dropdowns and popping elements relative to the reference element.",
+    "Enable the Fix Main Position to fix the main position and the Fix Relative Position to fix the relative position.",
+    "The Offset Y is enabled when the Main Position is top or bottom, and the Offset X enabled when the Main Position is left or right."
+  ],
+  "position_description": [
+    "All the values that you can consider as a position for popper are listed in the table below.",
+    "You can also use an alternative value instead of written positions. "
+  ],
+  "dropdown": [
+    "Creating Drop Down with Element Popper is very simple.",
+    "In this example we create a simple dropdown with minimum css."
+  ],
+  "dropdown_animation": "Use the animation prop, if you want to popper appears with pop-up animation",
+  "dropdown_right": "You can use any of the top, right and left values instead of the bottom position used in the above examples.",
+  "simple_nested": "By entering another ElementPopper as the popper value, you can create as many nested menus as you want.",
+  "nested_dropdown": "In this example, a dropdown with nested menus has been created using the feature described above."
 }

@@ -2,8 +2,9 @@ import React from "react"
 
 export default function (translate) {
   const props = {
+    title: "Props",
     description: (
-      <table>
+      <table style={{ margin: "0 auto" }}>
         <thead>
           <tr>
             <th>{translate("Name")}</th>
@@ -107,7 +108,73 @@ export default function (translate) {
     )
   }
 
+  const positions = {
+    title: "Positions",
+    description: "position_description",
+    jsx: (
+      <table style={{ margin: "0 auto" }}>
+        <thead>
+          <tr>
+            <th>{translate("Position")}</th>
+            <th>{translate("Alternative")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>top</td>
+            <td>top-center</td>
+          </tr>
+          <tr>
+            <td>bottom</td>
+            <td>bottom-center</td>
+          </tr>
+          <tr>
+            <td>left</td>
+            <td>left-center</td>
+          </tr>
+          <tr>
+            <td>right</td>
+            <td>right-center</td>
+          </tr>
+          <tr>
+            <td>top-start</td>
+            <td>top-left</td>
+          </tr>
+          <tr>
+            <td>top-end</td>
+            <td>top-right</td>
+          </tr>
+          <tr>
+            <td>bottom-start</td>
+            <td>bottom-left</td>
+          </tr>
+          <tr>
+            <td>bottom-end</td>
+            <td>bottom-right</td>
+          </tr>
+          <tr>
+            <td>left-start</td>
+            <td>left-top</td>
+          </tr>
+          <tr>
+            <td>left-end</td>
+            <td>left-bottom</td>
+          </tr>
+          <tr>
+            <td>right-start</td>
+            <td>right-top</td>
+          </tr>
+          <tr>
+            <td>right-end</td>
+            <td>right-bottom</td>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
+
   return [
-    props
+    props,
+    positions
   ]
 }

@@ -11,7 +11,9 @@ export default function Demo({ language = "en", translate }) {
     fixMainPosition: false,
     fixRelativePosition: false,
     offsetY: 0,
-    offsetX: 0
+    offsetX: 0,
+    arrow: true,
+    shadow: true
   })
   const containerRef = useRef()
 
@@ -36,7 +38,9 @@ export default function Demo({ language = "en", translate }) {
     fixMainPosition,
     fixRelativePosition,
     offsetY,
-    offsetX
+    offsetX,
+    arrow,
+    shadow
   } = state
 
   const Component = ({ size, backgroundColor, children }) => {
@@ -49,7 +53,7 @@ export default function Demo({ language = "en", translate }) {
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "center"
         }}
       >
         {translate(children)}
@@ -59,11 +63,10 @@ export default function Demo({ language = "en", translate }) {
 
   return (
     <>
-
       <div
         ref={containerRef}
         style={{
-          margin: "0 auto",
+          margin: "20px auto",
           backgroundColor: "whitesmoke",
           height: "400px",
           width: "80%",
@@ -95,8 +98,8 @@ export default function Demo({ language = "en", translate }) {
                 Popper Element
                 </Component>
             }
-            arrow
-            popperShadow
+            arrow={arrow}
+            popperShadow={shadow}
             position={mainPosition + "-" + relativePosition}
             fixMainPosition={fixMainPosition}
             fixRelativePosition={fixRelativePosition}
@@ -148,6 +151,24 @@ export default function Demo({ language = "en", translate }) {
             value: fixRelativePosition ? "enable" : "disable",
             onChange: value => updateState("fixRelativePosition", value === "enable")
           },
+          {
+            title: "Arrow",
+            options: [
+              ["Disable", "disable"],
+              ["Enable", "enable"]
+            ],
+            value: arrow ? "enable" : "disable",
+            onChange: value => updateState("arrow", value === "enable")
+          },
+          {
+            title: "Shadow",
+            options: [
+              ["Disable", "disable"],
+              ["Enable", "enable"]
+            ],
+            value: shadow ? "enable" : "disable",
+            onChange: value => updateState("shadow", value === "enable")
+          }
         ]}
       />
 
@@ -176,6 +197,11 @@ export default function Demo({ language = "en", translate }) {
       </div>
 
       <h3>{translate("Descriptions")}:</h3>
+      <ul>
+        {translate("demo_descriptions").map((description, index) => (
+          <li key={index}>{description}</li>
+        ))}
+      </ul>
     </>
   )
 }
