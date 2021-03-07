@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import ElementPopper from "../../../index"
 
-export default function (translate, language, Code) {
+export default function (translate, language) {
   const [state, setState] = useState({})
   const [state1, setState1] = useState(false)
 

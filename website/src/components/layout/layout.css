@@ -432,3 +432,7 @@ pre {
   cursor: pointer;
   height: 26px;
 }
+
+.element-popper-container p {
+  font-size: 16px;
+}

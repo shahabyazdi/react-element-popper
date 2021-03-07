@@ -11,6 +11,8 @@ import farsi from "../../languages/fa.json"
 import useClickOutSide from "./useClickOutside"
 
 import "./layout.css"
+import "./multi_select.css"
+import "./navbar.css"
 
 import 'prismjs/components/prism-jsx.min'
 import "prismjs/themes/prism-okaidia.css"
@@ -20,8 +22,11 @@ const sidebar = {
     { name: "Home", path: "" },
     { name: "Installation & Usage", path: "installation/" },
     { name: "Props & Positions", path: "props/" },
+    { name: "How It Work", path: "how-it-work/" },
     { name: "Creating DropDown", path: "dropdown/" },
     { name: "Nested DropDown", path: "nested-dropdown/" },
+    { name: "Multi Select & Handle Click Outside", path: "multi-select/" },
+    { name: "NavBar", path: "navbar/" },
   ]
 }
 
