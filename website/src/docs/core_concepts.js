@@ -21,8 +21,15 @@ export default function (translate, language) {
   }, [])
 
   const howItWork = {
-    title: "How It Work",
+    title: "Core Concepts",
     jsx: <>
+      <p>{translate("core_concepts_description")}</p>
+      <ul>
+        {(translate("core_concepts") || []).map((description, index) => (
+          <li key={index}>{description}</li>
+        ))}
+      </ul>
+
       <div
         className="element-popper-container"
         style={{
@@ -35,7 +42,7 @@ export default function (translate, language) {
           fontSize: "11px"
         }}
       >
-        <p>Element Popper Container</p>
+        <p>{translate("container with inline-block display")}</p>
         <div
           style={{
             border: "1px solid black",
@@ -43,7 +50,7 @@ export default function (translate, language) {
             boxShadow: "0 0 4px #ccc"
           }}
         >
-          <p>Refrence Element</p>
+          <p>{translate("Refrence Element")}</p>
         </div>
         <div
           style={{
@@ -52,7 +59,7 @@ export default function (translate, language) {
             padding: "10px"
           }}
         >
-          Arrow (optional)
+          {translate("Arrow (optional)")}
         </div>
         <div
           style={{
@@ -61,7 +68,7 @@ export default function (translate, language) {
             padding: "10px"
           }}
         >
-          <p>Container with absolute position</p>
+          <p>{translate("container with absolute position")}</p>
           <div
             style={{
               border: "1px dashed black",
@@ -69,7 +76,7 @@ export default function (translate, language) {
               padding: "10px"
             }}
           >
-            <p>Container with static position</p>
+            <p>{translate("container with static position")}</p>
             <div
               style={{
                 border: "1px solid black",
@@ -77,7 +84,7 @@ export default function (translate, language) {
                 boxShadow: "0 0 4px #ccc"
               }}
             >
-              <p>Popper Element</p>
+              <p>{translate("Popper Element")}</p>
             </div>
           </div>
         </div>
@@ -99,12 +106,12 @@ export default function (translate, language) {
   }
 
   const popperDescription = {
+    title: "Reference and Popper Larger Than Parent",
     jsx: <>
       <div style={{
         display: "flex",
         marginLeft: "auto",
         marginRight: "auto",
-        marginBottom: "40px",
         height: "200px",
         width: "70%"
       }}>
@@ -112,17 +119,20 @@ export default function (translate, language) {
           <div
             style={{
               height: ((Math.round(elementCenter || 100) - 10) + "px"),
-              borderTop: "1px solid",
-              borderLeft: "1px solid",
+              borderTop: "2px solid",
+              [language === "en" ? "borderLeft" : "borderRight"]: "2px solid",
               borderColor: elementCenter >= 100 ? "green" : "red"
             }}
           />
-          <div style={{ marginBottom: "5px" }}>center</div>
+          <div style={{
+            marginBottom: "5px",
+            [language === "en" ? "marginLeft" : "marginRight"]: `-${language === "en" ? "20" : "12"}px`
+          }}>{translate("center")}</div>
           <div
             style={{
               flex: "1",
-              borderBottom: "1px solid",
-              borderLeft: "1px solid",
+              borderBottom: "2px solid",
+              [language === "en" ? "borderLeft" : "borderRight"]: "2px solid",
               borderColor: elementCenter < 100 ? "green" : "red"
             }}
           />
@@ -168,7 +178,7 @@ export default function (translate, language) {
                     justifyContent: "center"
                   }}
                 >
-                  Refrence Element
+                  {translate("Refrence Element")}
                 </div>
               }
               popper={
@@ -176,14 +186,14 @@ export default function (translate, language) {
                   style={{
                     width: "110px",
                     height: "110px",
-                    backgroundColor: "whites",
+                    backgroundColor: "white",
                     textAlign: "center",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center"
                   }}
                 >
-                  Popper Element
+                  {translate("Popper Element")}
                 </div>
               }
               arrow
@@ -192,12 +202,26 @@ export default function (translate, language) {
           </div>
         </div>
       </div>
+
+      {translate("popper_larger_parent").map((string, index) => (
+        <div key={index} dangerouslySetInnerHTML={{ __html: `<p>${string}</p>` }} />
+      ))}
     </>
+  }
+
+  const importantNotes = {
+    title: "Important Notes",
+    description: <ol>
+      {translate("important_notes").map((note, index) => (
+        <div key={index} dangerouslySetInnerHTML={{ __html: `<li>${note}</li>` }} />
+      ))}
+    </ol>
   }
 
   return [
     howItWork,
-    popperDescription
+    popperDescription,
+    importantNotes
   ]
 }
 

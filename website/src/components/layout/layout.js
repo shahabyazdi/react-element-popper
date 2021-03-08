@@ -22,7 +22,7 @@ const sidebar = {
     { name: "Home", path: "" },
     { name: "Installation & Usage", path: "installation/" },
     { name: "Props & Positions", path: "props/" },
-    { name: "How It Work", path: "how-it-work/" },
+    { name: "Core Concepts", path: "core-concepts/" },
     { name: "Creating DropDown", path: "dropdown/" },
     { name: "Nested DropDown", path: "nested-dropdown/" },
     { name: "Multi Select & Handle Click Outside", path: "multi-select/" },

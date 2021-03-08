@@ -3,6 +3,7 @@
   background-color: rgb(146, 146, 221);
   display: flex;
   justify-content: space-between;
+  direction: ltr;
 }
 
 .nested-navbar .navbar-item {
