@@ -3,14 +3,14 @@ module.exports = {
     siteUrl: "https://shahabyazdi.github.io/react-element-popper/",
     en: {
       title: "React Element Popper",
-      description: "element popper component for react.",
-      keywords: ["react", "element", "popper", "component", "position"],
+      description: "A small library to create a variety of elements that require Popper, such as dropdowns, modals, multi selects, and more.",
+      keywords: ["react", "element", "popper", "component", "position", "dropdown", "modal"],
       type: "website"
     },
     fa: {
       title: "ری اکت المنت پاپر",
-      description: "کامپوننت المنت پاپر برای ری اکت",
-      keywords: ["ری اکت", "المنت", "پاپر", "کاکپوننت"],
+      description: "یک کتابخانه کوچک برای ساخت عناصر متنوعی که به Popper نیاز دارند ، مانند  dropdown ها، modal ها ، multi select ها و غیره .",
+      keywords: ["ری اکت", "المنت", "پاپر", "کامپوننت", "منو", "منو کشویی"],
       type: "وب سایت"
     }
   },
@@ -21,14 +21,14 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        icon: "src/images/icon.png",
-      },
+        icon: "src/images/icon.png"
+      }
     },
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /assets/,
+          include: /assets/
         }
       }
     },
@@ -36,8 +36,8 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",
-        path: `${__dirname}/src/pages/`,
+        path: `${__dirname}/src/pages/`
       }
     }
-  ],
-};
+  ]
+}

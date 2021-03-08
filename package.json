@@ -1,7 +1,7 @@
 {
   "name": "react-element-popper",
-  "version": "1.0.7",
-  "description": "",
+  "version": "1.0.8",
+  "description": "A small library to create a variety of elements that require Popper, such as dropdowns, modals, multiselects, and more.",
   "main": "./build/index.min.js",
   "module": "./build/index.module.js",
   "browser": "./build/browser.min.js",
@@ -17,7 +17,11 @@
     "react",
     "element",
     "popper",
-    "position"
+    "position",
+    "component",
+    "dropdown",
+    "modal",
+    "multi select"
   ],
   "author": "shahab yazdi <sh.yazdi@gmail.com>",
   "license": "MIT",
