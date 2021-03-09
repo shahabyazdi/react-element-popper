@@ -433,6 +433,10 @@ pre {
   height: 26px;
 }
 
+.element-popper-container {
+  max-width: 600px;
+}
+
 .element-popper-container p {
   font-size: 16px;
 }

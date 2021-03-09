@@ -70,11 +70,11 @@ export default function App() {
       values={values}
       onChange={setValues}
       options={[
-        ["option 1", "1"],
-        ["option 2", "2"],
-        ["option 3", "3"],
-        ["option 4", "4"],
-        ["option 5", "5"],
+        ["${translate("option")} 1", "1"],
+        ["${translate("option")} 2", "2"],
+        ["${translate("option")} 3", "3"],
+        ["${translate("option")} 4", "4"],
+        ["${translate("option")} 5", "5"],
       ]}
     />
   )
@@ -95,7 +95,7 @@ function MultiSelect({ options = [], values = [], onChange }) {
           className="placeholder"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          click here to select
+          ${translate("click here to select")}
         </div>
       )}
       popper={isMenuOpen && (
@@ -106,7 +106,7 @@ function MultiSelect({ options = [], values = [], onChange }) {
               checked={!mustSelectAll}
               onChange={selectAll}
             />
-            <span>select all</span>
+            <span>${translate("select all")}</span>
           </label>
           {options.map(([text, value], index) => (
             <label key={index} className="option">
@@ -151,17 +151,19 @@ function MultiSelect({ options = [], values = [], onChange }) {
       values={values}
       onChange={setValues}
       options={[
-        ["option 1", "1"],
-        ["option 2", "2"],
-        ["option 3", "3"],
-        ["option 4", "4"],
-        ["option 5", "5"],
+        [`${translate("option")} 1`, "1"],
+        [`${translate("option")} 2`, "2"],
+        [`${translate("option")} 3`, "3"],
+        [`${translate("option")} 4`, "4"],
+        [`${translate("option")} 5`, "5"]
       ]}
+      translate={translate}
     />
   }
 
   const handleClickOutside = {
     title: "Handle Click Outside",
+    description: "handle_click_outside",
     code: `useEffect(() => {
   function handleClickOutside(e) {
     if (ref.current && !ref.current.contains(e.target)) {
@@ -176,13 +178,14 @@ function MultiSelect({ options = [], values = [], onChange }) {
       values={values1}
       onChange={setValues1}
       options={[
-        ["option 1", "1"],
-        ["option 2", "2"],
-        ["option 3", "3"],
-        ["option 4", "4"],
-        ["option 5", "5"],
+        [`${translate("option")} 1`, "1"],
+        [`${translate("option")} 2`, "2"],
+        [`${translate("option")} 3`, "3"],
+        [`${translate("option")} 4`, "4"],
+        [`${translate("option")} 5`, "5"],
       ]}
       useClickOutside
+      translate={translate}
     />
   }
 
@@ -192,7 +195,7 @@ function MultiSelect({ options = [], values = [], onChange }) {
   ]
 }
 
-function MultiSelect({ options = [], values = [], onChange, useClickOutside = false }) {
+function MultiSelect({ options = [], values = [], onChange, useClickOutside = false, translate }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const ref = useRef()
 
@@ -220,7 +223,7 @@ function MultiSelect({ options = [], values = [], onChange, useClickOutside = fa
           className="placeholder"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          click here to select
+          {translate("click here to select")}
         </div>
       )}
       popper={isMenuOpen && (
@@ -231,7 +234,7 @@ function MultiSelect({ options = [], values = [], onChange, useClickOutside = fa
               checked={!mustSelectAll}
               onChange={selectAll}
             />
-            <span>select all</span>
+            <span>{translate("select all")}</span>
           </label>
           {options.map(([text, value], index) => (
             <label className="option" key={index}>

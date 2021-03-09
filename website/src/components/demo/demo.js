@@ -65,6 +65,7 @@ export default function Demo({ language = "en", translate }) {
     <>
       <div
         ref={containerRef}
+        className="element-popper-container"
         style={{
           margin: "20px auto",
           backgroundColor: "whitesmoke",

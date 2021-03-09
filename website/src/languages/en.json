@@ -37,5 +37,24 @@
     "Set the fixMainPosition to true to fix the main position and the fixRelativePosition to true to fix the relative position.",
     "If you want to change the size of the refrence element, please set the box-sizing to border-box.",
     "If the parent element has flex position, and flex-direction is column, it is better to define the width for element popper container."
-  ]
+  ],
+  "active_prop_1": "In most cases, you only need to use a boolean as state for setting the popper to appear and hide.",
+  "active_prop_2": "But in some cases, for example, when a large number of operations are required to make the popper component and it is not optimal to repeat that operations every time popper appears, or in cases where the width and height of the popper are not specified at the moment of appearance (For example, the height and width are determined after the async operation) It is necessary to use active prop to show and hide Popper. Otherwise, Popper's position may not be calculated correctly.",
+  "active_prop_3": "But it rarely happens that neither of the above two examples works. In these cases, it is recommended to use a combination of the above two examples.",
+  "active_prop_4": "In this section, I tried to give examples for each of these three situations:",
+  "first_example": [
+    "In this example, active props are not used and it is useful for most of the times.",
+    "In fact, by using a boolean as state, popper is generated at the moment of appearance."
+  ],
+  "second_example": "I made a change in the above function Component to return its output with a delay and named it AsyncComponent, and as you can see, if we try to use it with the method of the first example, its position calculations will be accompanied by an error.",
+  "second_example_1": "The reason for this computational error is that at the first moment, instead of div, the null value is defined as popper and causes this problem.",
+  "second_example_2": "To solve this problem, you can easily use the active prop:",
+  "second_example_3": "As you can see, there is no problem in calculating Popper's position, and the reason is that in fact, popper is not generated at the moment of appearance and is always there, and by changing the active value, you only change its visibility from hidden to visible.",
+  "third_example": "Sometimes your component is like the second example, but you want to make it visible look like the first example.",
+  "third_example_1": "In this case, you must use a combination of the first and second examples.",
+  "refresh_position": [
+    "When the popper element is open and the position of refrence element changes, the popper position remains constant because the element popper does not listen to the click events.",
+    "In these cases, you can use the refreshPosition function, which is located in the ref object."
+  ],
+  "handle_click_outside": "Add this code to the previous example for handling clicks outside of the component."
 }

@@ -144,6 +144,7 @@ export default function (translate, language) {
         </div>
         <div
           ref={parentRef}
+          className="element-popper-container"
           style={{
             backgroundColor: "whitesmoke",
             overflow: "auto",
@@ -223,8 +224,4 @@ export default function (translate, language) {
     popperDescription,
     importantNotes
   ]
-}
-
-function Example() {
-
 }
