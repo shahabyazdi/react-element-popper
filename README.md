@@ -1,5 +1,7 @@
 # ElementPopper
 
+A small React component to create a variety of elements that require Popper, such as dropdowns, modals, multiselects, and more.
+
 <div align="center">
   <img src="https://github.com/shahabyazdi/react-element-popper/blob/master/screenshot/screenshot.jpg?raw=true" alt="Element Popper"/>
 </div>
