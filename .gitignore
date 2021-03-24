@@ -2,6 +2,7 @@
 website/node_modules
 website/public
 website/.cache
+website/gh-pages.js
 /build/index.min.js
 /build/index.module.js
 /build/browser.min.js
