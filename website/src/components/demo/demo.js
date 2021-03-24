@@ -19,7 +19,7 @@ export default function Demo({ language = "en", translate }) {
 
   useEffect(() => {
     containerRef.current.scrollTo(
-      ((containerRef.current.clientWidth + 100) * (language === "en" ? 1 : -1)),
+      ((containerRef.current.clientWidth + 115) * (language === "en" ? 1 : -1)),
       (containerRef.current.clientHeight)
     )
   }, [language])
@@ -53,7 +53,8 @@ export default function Demo({ language = "en", translate }) {
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center"
+          justifyContent: "center",
+          fontSize: "16px"
         }}
       >
         {translate(children)}

@@ -90,6 +90,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 20px;
 }
 
 .navbar {
@@ -108,7 +109,7 @@ body {
   float: right;
   position: absolute;
   right: 20px;
-  top: 22px;
+  top: 25%;
 }
 
 .icon {
@@ -194,6 +195,7 @@ body {
   margin-bottom: 5px;
   position: absolute;
   left: 10px;
+  font-size: 14px;
 }
 
 .navbar .navbar-title .name::after {
@@ -203,6 +205,14 @@ body {
 .example {
   padding: 15px 0;
   border-bottom: 1px solid #ccc;
+}
+
+.example h2{
+  font-size: 20px;
+}
+
+.example p{
+  font-size: 18px;
 }
 
 table {
@@ -246,6 +256,9 @@ table td {
 pre {
   max-height: 510px;
   margin: 20px !important;
+  font-size: 14px!important;
+  border-radius: 7px!important;
+  padding: 15px!important;
 }
 
 .rtl .main pre,

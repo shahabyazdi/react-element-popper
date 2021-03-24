@@ -53,7 +53,7 @@ export default function App() {
   return (
     <div>
       <div style={{ marginBottom: "150px", padding: "0 10px" }}>
-        <h4>${translate("Example 1 (without using refresh position)")}</h4>
+        <h2>${translate("Example 1 (without using refresh position)")} :</h2>
         {visible && <span>${translate("a demo text to force the refrence element to move forward!")}</span>}
         <ElementPopper {...globalProps} />
         <button
@@ -64,7 +64,7 @@ export default function App() {
       </div>
     
       <div style={{ marginBottom: "150px", padding: "0 10px" }}>
-        <h4>${translate("Example 2 (with using refresh position)")}</h4>
+        <h2>${translate("Example 2 (with using refresh position)")} :</h2>
         {visible2 && <span>${translate("a demo text to force the refrence element to move forward!")}</span>}
         <ElementPopper ref={ref} {...globalProps} />
         <button
@@ -82,7 +82,7 @@ export default function App() {
 }`,
     jsx: <div>
       <div style={{ marginBottom: "150px", padding: "0 10px" }}>
-        <h4>{translate("Example 1 (without using refresh position)")}</h4>
+        <h2>{translate("Example 1 (without using refresh position)")} :</h2>
         {visible && <span>{translate("a demo text to force the refrence element to move forward!")}</span>}
         <ElementPopper {...globalProps} />
         <button
@@ -93,7 +93,7 @@ export default function App() {
       </div>
 
       <div style={{ marginBottom: "150px", padding: "0 10px" }}>
-        <h4>{translate("Example 2 (with using refresh position)")}</h4>
+        <h2>{translate("Example 2 (with using refresh position)")} :</h2>
         {visible2 && <span>{translate("a demo text to force the refrence element to move forward!")}</span>}
         <ElementPopper ref={ref} {...globalProps} />
         <button
@@ -124,7 +124,8 @@ function Component({ size, backgroundColor, children, translate }) {
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center"
+        justifyContent: "center",
+        fontSize: "16px"
       }}
     >
       {translate(children)}

@@ -3,7 +3,7 @@ import React from "react"
 export default function Example({ id, title, description, code, jsx }) {
   return (
     <div className="example" id={id}>
-      {title && <h4 className="title" id={id}><a href={"#" + id}>{title}</a></h4>}
+      {title && <h2 className="title" id={id}><a href={"#" + id}>{title}</a></h2>}
       {description && typeof description === "string" ?
         <p>{description}</p> : (description || null)
       }

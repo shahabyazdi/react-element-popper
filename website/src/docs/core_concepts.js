@@ -176,7 +176,8 @@ export default function (translate, language) {
                     textAlign: "center",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    fontSize: "16px"
                   }}
                 >
                   {translate("Refrence Element")}
@@ -191,7 +192,8 @@ export default function (translate, language) {
                     textAlign: "center",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    fontSize: "16px"
                   }}
                 >
                   {translate("Popper Element")}

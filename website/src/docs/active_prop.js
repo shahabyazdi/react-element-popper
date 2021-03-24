@@ -489,7 +489,8 @@ function Component({ height, width, backgroundColor, children, translate }) {
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center"
+        justifyContent: "center",
+        fontSize: "16px"
       }}
     >
       {translate(children)}

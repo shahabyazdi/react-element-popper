@@ -53,7 +53,7 @@ export default function (translate, language) {
 import ElementPopper from "react-element-popper"
 
 export default function App() {
-  const [state, setState] = useState(false)
+  const [state, setState] = useState({})
 
   const updateState = number => setState({ ...state, [number]: !state[number] })
 
