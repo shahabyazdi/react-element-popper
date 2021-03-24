@@ -9,7 +9,7 @@
 
 ## Quick start
 
-1.  clone the repo
-2.  cd website
-3.  npm install
-4.  gatsby develop
+1.  **clone the repo**
+2.  **cd website**
+3.  **npm install**
+4.  **gatsby develop**
