@@ -1,0 +1,42 @@
+.multi-select {
+  border-radius: 5px;
+  font-size: 15px;
+  min-width: 120px;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.multi-select .placeholder {
+  border: 1px #ddd solid;
+  background-color: white;
+  border-radius: 5px;
+  height: 21px;
+  font-size: 13px;
+  color: rgb(37, 35, 35);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 5px 20px;
+}
+
+.multi-select .options {
+  border: 1px solid #ddd;
+  background: white;
+  color: black;
+  max-height: 300px;
+  overflow: auto;
+  border-radius: 2px;
+}
+
+.multi-select .options .option {
+  display: block;
+  color: rgb(37, 35, 35);
+  font-weight: 500px;
+  font-size: 14px;
+  margin-top: 0;
+  padding-top: 2px;
+}
+
+.multi-select .options .option:hover {
+  background-color: dodgerblue;
+  color: white;
+}

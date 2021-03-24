@@ -1,0 +1,59 @@
+{
+  "npm_description": "",
+  "yarn_description": "",
+  "basic_import": "In the most cases, just importing ElementPoper is enough.",
+  "basic_import2": "If you want to enable built-in arrow or popper shadow, you need to import the style as well:",
+  "demo_descriptions": [
+    "React Element Popper is used to create menus, nested menus, dropdowns and popping elements relative to the reference element.",
+    "The Offset Y is enabled when the Main Position is top or bottom, and the Offset X is enabled when the Main Position is left or right."
+  ],
+  "position_description": [
+    "All the values that you can consider as a position for popper are listed in the table below.",
+    "You can also use an alternative value instead of written positions. "
+  ],
+  "dropdown": [
+    "Creating Drop Down with Element Popper is very simple.",
+    "In this example we create a simple dropdown with minimum css."
+  ],
+  "dropdown_animation": "Use the animation prop, if you want to popper appears with pop-up animation",
+  "dropdown_right": "You can use any of the top, right and left values instead of the bottom position used in the above examples.",
+  "simple_nested": "By entering another ElementPopper as the popper value, you can create as many nested menus as you want.",
+  "nested_dropdown": "In this example, a dropdown with nested menus has been created using the feature described above.",
+  "core_concepts_description": "ElementPopper wraps around your reference and popper elements in several containers that you need to know the arrangement of that containers to better design your layout.",
+  "core_concepts": [
+    "The first container has an inline-block display that wraps all the reference, popper and arrow (if enabled) elements together and is used to get the left and top value of the reference element.",
+    "The second container has absolute position with top and left value equal to zero, which is used to position the popper in the document by setting its transform value.",
+    "Finally, the last container with a static position that includes the popper element and is used to get the exact amount of width and height of the popper element."
+  ],
+  "popper_larger_parent": [
+    "If the <b>width</b> or <b>height</b> of the reference plus popper elements is greater than the parent element, the main position of the popper will be changed if center of the reference element has passed through the middle of the parent element.",
+    "The condition is for that Popper always be in the part of it's 'scrollable' parent element('s) that has more space and it is considered only when <b>the edge of the popper element has not reach the edge of the visible document</b>."
+  ],
+  "important_notes": [
+    "The most important thing is that this library only tries to be in the position you specified! This is because the arrangement of the elements containing the refrence element may be such that the popper does not fit in that position, or the user may start scrolling or resizing the page, in which case the popper position will change. Of course, you can force the element popper to show the popper position exactly where you want it, in which case you should use the fixMainPosition and fixRelativePosition properties.",
+    "Do not use margin and padding to make space between the popper and the refrence element, and instead use the offsetY and offsetX properties.",
+    "Do not try to change the element popper container position to relative with CSS or Style, because it will disrupt the calculations.",
+    "Set the fixMainPosition to true to fix the main position and the fixRelativePosition to true to fix the relative position.",
+    "If you want to change the size of the refrence element, please set the box-sizing to border-box.",
+    "If the parent element has flex position, and flex-direction is column, it is better to define the width for element popper container."
+  ],
+  "active_prop_1": "In the most cases, you only need to use a boolean as state for setting the popper to appear and hide.",
+  "active_prop_2": "But in some cases, for example, when a large number of operations are required to make the popper component and it is not optimal to repeat that operations every time popper appears, or in cases where the width and height of the popper are not specified at the moment of appearance (For example, the height and width are determined after the async operation) It is necessary to use active prop to show and hide Popper. Otherwise, Popper's position may not be calculated correctly.",
+  "active_prop_3": "But it rarely happens that neither of the above two examples works. In these cases, it is recommended to use a combination of the above two examples.",
+  "active_prop_4": "In this section, I tried to give examples for each of these three situations:",
+  "first_example": [
+    "In this example, active props are not used and it is useful for most of the times.",
+    "In fact, by using a boolean as state, popper is generated at the moment of appearance."
+  ],
+  "second_example": "I made a change in the above function Component to return its output with a delay and named it AsyncComponent, and as you can see, if we try to use it with the method of the first example, its position calculations will encounter error.",
+  "second_example_1": "The reason for this computational error is that at the first moment, instead of div, the null value is defined as popper and causes this problem.",
+  "second_example_2": "To solve this problem, you can easily use the active prop:",
+  "second_example_3": "As you can see, there is no problem in calculating Popper's position, and the reason is that in fact, popper is not generated at the moment of appearance and is always there, and by changing the active value, you only change its visibility from hidden to visible.",
+  "third_example": "Sometimes your component is like the second example, but you want to make it visible as the first example.",
+  "third_example_1": "In this case, you must use a combination of the first and second examples.",
+  "refresh_position": [
+    "When the popper element is open and the position of refrence element changes, the popper position remains constant because the element popper does not listen to the click events.",
+    "In these cases, you can use the refreshPosition function, which is located in the ref object."
+  ],
+  "handle_click_outside": "Add this code to the previous example for handling clicks outside of the component."
+}

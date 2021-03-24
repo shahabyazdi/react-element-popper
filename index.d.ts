@@ -1,8 +1,8 @@
 declare module "react-element-popper" {
   import React from "react"
 
-  interface ElementPopperProps{
-    ref?:React.RefObject<any>,
+  interface ElementPopperProps {
+    ref?: React.RefObject<any>,
     /**
      * Refrence element
      */
@@ -30,7 +30,7 @@ declare module "react-element-popper" {
      *  arrow={<ArrowComponent/>}
      * />
      */
-    active?:boolean,
+    active?: boolean,
     arrow?: boolean | React.ReactElement,
     containerStyle?: React.CSSProperties,
     containerClassName?: string,
@@ -61,13 +61,13 @@ declare module "react-element-popper" {
      * <Calendar calendar="persian" />
      * <DatePicker calendar="indian" />
      */
-    position? : string,
+    position?: string,
     /**
      * default z-index = 0
      */
-    zIndex?:number,
-    popperShadow?:boolean,
-    onChange?(data:{
+    zIndex?: number,
+    popperShadow?: boolean,
+    onChange?(data: {
       popper: {
         top: number,
         bottom: number,
@@ -94,12 +94,13 @@ declare module "react-element-popper" {
         direction: string
       },
       position: string,
-      scroll: { 
-        scrollLeft:number,
-        scrollTop:number
-      }
+      scroll: {
+        scrollLeft: number,
+        scrollTop: number
+      },
+      scrollableParents: HTMLElement[]
     }): void
-  } 
+  }
 
   export default function ElementPopper(props: ElementPopperProps): React.ReactElement
 }
