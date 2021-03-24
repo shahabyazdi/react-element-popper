@@ -57,6 +57,10 @@ export default function Title({ language, section = "default", sidebar, pathname
         {
           name: "keywords",
           content: keywords
+        },
+        {
+          name: "google-site-verification",
+          content: "eN9hWwtvlYdXL_37ZU2ML8AUY8685Fw3O98T5vidr-4"
         }
       ]}
     />
