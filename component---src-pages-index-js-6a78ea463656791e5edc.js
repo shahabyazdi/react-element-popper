@@ -1,0 +1,2 @@
+(self.webpackChunkreact_element_popper=self.webpackChunkreact_element_popper||[]).push([[678],{7704:function(e,n,t){"use strict";t.r(n),t.d(n,{default:function(){return u}});var a=t(7294),r=t(591);function u(e){var n=e.pageContext.language||"en";return a.createElement(r.Z,{language:n})}}}]);
+//# sourceMappingURL=component---src-pages-index-js-6a78ea463656791e5edc.js.map
