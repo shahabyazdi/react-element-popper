@@ -14,6 +14,7 @@ module.exports = {
       type: "وب سایت"
     }
   },
+  pathPrefix: "/react-element-popper",
   plugins: [
     "gatsby-plugin-postcss",
     "gatsby-plugin-react-helmet",
