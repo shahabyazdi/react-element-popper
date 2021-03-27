@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/fa/active-prop/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/fa/core-concepts/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/fa/dropdown/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/fa/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/fa/installation/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/fa/multi-select/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/fa/navbar/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/fa/nested-dropdown/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/fa/props/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/fa/refresh-position/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/active-prop/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/core-concepts/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/dropdown/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/installation/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/multi-select/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/navbar/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/nested-dropdown/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/props/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://shahabyazdi.github.io/react-element-popper/react-element-popper/refresh-position/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/fa/active-prop/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/fa/dropdown/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/fa/core-concepts/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/fa/installation/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/fa/multi-select/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/fa/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/fa/navbar/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/fa/nested-dropdown/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/fa/refresh-position/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/fa/props/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/active-prop/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/core-concepts/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/dropdown/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/installation/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/multi-select/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/navbar/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/nested-dropdown/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/props/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://shahabyazdi.github.io/react-element-popper/refresh-position/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
