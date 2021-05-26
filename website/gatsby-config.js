@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://shahabyazdi.github.io/react-element-popper/",
+    siteUrl: "https://shahabyazdi.github.io/",
     en: {
       title: "React Element Popper",
       description: "A small React component to create a variety of elements that require Popper, such as dropdown menus, modals, multi selects, and more.",
