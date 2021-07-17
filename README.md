@@ -79,7 +79,7 @@ export default function Example() {
 | arrow               | Boolean or React.ReactElement |      false      |
 | fixMainPosition     |            Boolean            |      false      |
 | fixRelativePosition |            Boolean            |      false      |
-| animation           |            Boolean            |      false      |
+| animations          |             Array             |       []        |
 | popperShadow        |            Boolean            |      false      |
 | active              |            Boolean            |      true       |
 | offsetY             |            Number             |        0        |
