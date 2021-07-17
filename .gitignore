@@ -1,7 +1,7 @@
 /node_modules
+/build
+/animations
 website/node_modules
 website/public
 website/.cache
-build/
-animations/
 .npmignore
