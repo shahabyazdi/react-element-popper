@@ -1,0 +1,1 @@
+function t({from:t=0,to:o=1,duration:e=400}={}){return t<0&&(t=0),o>1&&(o=1),function({popper:i,arrow:s}){i.style.opacity=t,s&&(s.style.opacity=t),setTimeout((()=>{i.style.transition=e+"ms",i.style.opacity=o,s&&(s.style.transition=e+"ms",s.style.opacity=o)}),18)}}export default t;

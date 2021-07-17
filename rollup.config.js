@@ -1,38 +1,34 @@
-import peerDepsExternal from "rollup-plugin-peer-deps-external"
-import babel from "@rollup/plugin-babel"
-import resolve from "@rollup/plugin-node-resolve"
-import commonjs from "@rollup/plugin-commonjs"
-import { terser } from "rollup-plugin-terser"
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
+import babel from "@rollup/plugin-babel";
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import fs from "fs";
+import copy from "rollup-plugin-copy";
+import { terser } from "rollup-plugin-terser";
 
-const external = [
-  "react",
-  "react-dom"
-]
+const external = ["react", "react-dom"];
 
-const presets = [
-  "@babel/preset-react",
-  "@babel/preset-env"
-]
+const presets = ["@babel/preset-react", "@babel/preset-env"];
 
 const globals = {
-  react: "React"
-}
+  react: "React",
+};
 
 export default [
   {
-    input: "index.js",
+    input: "src/index.js",
     output: [
       {
         file: "build/index.min.js",
         format: "cjs",
         plugins: [terser()],
-        exports: "named"
+        exports: "named",
       },
       {
         file: "build/index.module.js",
         format: "es",
         plugins: [terser()],
-        exports: "named"
+        exports: "named",
       },
       {
         file: "build/browser.min.js",
@@ -40,8 +36,8 @@ export default [
         plugins: [terser()],
         name: "ElementPopper",
         exports: "default",
-        globals
-      }
+        globals,
+      },
     ],
     external,
     plugins: [
@@ -49,10 +45,32 @@ export default [
       peerDepsExternal(),
       babel({
         exclude: /node_modules/,
-        presets
+        presets,
       }),
-      commonjs()
-    ]
-  }
+      commonjs(),
+      copy({
+        targets: [{ src: "src/element_popper.css", dest: "build" }],
+      }),
+    ],
+  },
+  ...build("animations"),
 ];
 
+function build(path) {
+  const nodePath = `./src/${path}`;
+  const array = fs
+    .readdirSync(`${nodePath}`)
+    .map((file) => file.replace(/\.js$/, ""));
+
+  return array.map((name) => ({
+    input: `src/${path}/${name}.js`,
+    output: [
+      {
+        file: `${path}/${name}.js`,
+        format: "es",
+        exports: "default",
+        plugins: [terser()],
+      },
+    ],
+  }));
+}

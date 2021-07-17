@@ -1,48 +1,48 @@
 declare module "react-element-popper" {
-  import React from "react"
+  import React from "react";
 
   interface ElementPopperProps {
-    ref?: React.RefObject<any>,
+    ref?: React.RefObject<any>;
     /**
      * Refrence element
      */
-    element: React.ReactElement,
+    element: React.ReactElement;
     /**
      * Popper element
      */
-    popper?: React.ReactElement,
+    popper?: React.ReactElement;
     /**
      * Enter `true` if you want to use a built-in arrow.
-     * 
+     *
      * Or enter you're component to render it as an arrow.
-     * 
+     *
      * @example
-     * 
+     *
      * <ElementPopper
      *  element={<RefrenceComponent/>}
      *  popper={<PopperComponent/>}
      *  arrow
      * />
-     * 
+     *
      * <ElementPopper
      *  element={<RefrenceComponent/>}
      *  popper={<PopperComponent/>}
      *  arrow={<ArrowComponent/>}
      * />
      */
-    active?: boolean,
-    arrow?: boolean | React.ReactElement,
-    containerStyle?: React.CSSProperties,
-    containerClassName?: string,
-    arrowStyle?: React.CSSProperties,
-    arrowClassName?: string,
-    fixMainPosition?: boolean,
-    fixRelativePosition?: boolean,
-    offsetY?: number,
-    offsetX?: number,
-    animation?: boolean,
+    active?: boolean;
+    arrow?: boolean | React.ReactElement;
+    containerStyle?: React.CSSProperties;
+    containerClassName?: string;
+    arrowStyle?: React.CSSProperties;
+    arrowClassName?: string;
+    fixMainPosition?: boolean;
+    fixRelativePosition?: boolean;
+    offsetY?: number;
+    offsetX?: number;
+    animations?: Function[];
     /**
-     * Availble positions: 
+     * Availble positions:
      *
      *   - top or top-center
      *   - bottom or bottom-center
@@ -56,51 +56,102 @@ declare module "react-element-popper" {
      *   - bottom-end or bottom-right
      *   - left-end or left-bottom
      *   - right-end or right-bottom
-     * 
-     * @example
-     * <Calendar calendar="persian" />
-     * <DatePicker calendar="indian" />
+     *
      */
-    position?: string,
+    position?: string;
     /**
      * default z-index = 0
      */
-    zIndex?: number,
-    popperShadow?: boolean,
+    zIndex?: number;
+    popperShadow?: boolean;
     onChange?(data: {
       popper: {
-        top: number,
-        bottom: number,
-        left: number,
-        right: number,
-        height: number,
-        width: number
-      },
+        top: number;
+        bottom: number;
+        left: number;
+        right: number;
+        height: number;
+        width: number;
+      };
       element: {
-        top: number,
-        bottom: number,
-        left: number,
-        right: number,
-        height: number,
-        width: number
-      },
+        top: number;
+        bottom: number;
+        left: number;
+        right: number;
+        height: number;
+        width: number;
+      };
       arrow: {
-        top: number,
-        bottom: number,
-        left: number,
-        right: number,
-        height: number,
-        width: number,
-        direction: string
-      },
-      position: string,
+        top: number;
+        bottom: number;
+        left: number;
+        right: number;
+        height: number;
+        width: number;
+        direction: string;
+      };
+      position: string;
       scroll: {
-        scrollLeft: number,
-        scrollTop: number
-      },
-      scrollableParents: HTMLElement[]
-    }): void
+        scrollLeft: number;
+        scrollTop: number;
+      };
+      scrollableParents: HTMLElement[];
+    }): void;
   }
 
-  export default function ElementPopper(props: ElementPopperProps): React.ReactElement
+  export default function ElementPopper(
+    props: ElementPopperProps
+  ): React.ReactElement;
+}
+
+declare module "react-element-popper/animations/transition" {
+  type data = {
+    /**
+     * @default 12
+     */
+    from?: number;
+    /**
+     * @default 400
+     */
+    duration?: number;
+    transition?: string;
+  };
+
+  export default function transition(props?: data): Function;
+}
+
+declare module "react-element-popper/animations/opacity" {
+  type data = {
+    /**
+     * @default 0
+     */
+    from?: number;
+    /**
+     * @default 1
+     */
+    to?: number;
+    /**
+     * @default 400
+     */
+    duration?: number;
+  };
+
+  export default function opacity(props?: data): Function;
+}
+
+declare module "react-element-popper/animations/size" {
+  type data = {
+    /**
+     * @default 0
+     *
+     * numbers between 0 to 100
+     */
+    from?: number;
+    /**
+     * @default 1
+     */
+    duration?: number;
+  };
+
+  export default function size(props?: data): Function;
 }

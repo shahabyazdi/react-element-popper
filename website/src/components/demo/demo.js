@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from "react"
-import Selectors from "../selectors/selectors"
-import ElementPopper from "../../../../index"
-import "./demo.css"
-import "../../../../build/element_popper.css"
+import React, { useState, useRef, useEffect } from "react";
+import Selectors from "../selectors/selectors";
+import ElementPopper from "../../../../src/index";
+import "./demo.css";
+import "../../../../build/element_popper.css";
 
 export default function Demo({ language = "en", translate }) {
   const [state, setState] = useState({
@@ -13,24 +13,26 @@ export default function Demo({ language = "en", translate }) {
     offsetY: 0,
     offsetX: 0,
     arrow: true,
-    shadow: true
-  })
-  const containerRef = useRef()
+    shadow: true,
+  });
+  const containerRef = useRef();
 
   useEffect(() => {
     containerRef.current.scrollTo(
-      ((containerRef.current.clientWidth + 115) * (language === "en" ? 1 : -1)),
-      (containerRef.current.clientHeight)
-    )
-  }, [language])
+      (containerRef.current.clientWidth + 115) * (language === "en" ? 1 : -1),
+      containerRef.current.clientHeight
+    );
+  }, [language]);
 
   const updateState = (key, value) => {
     if (typeof key === "object") {
-      setState({ ...state, ...key })
+      setState({ ...state, ...key });
     } else {
-      setState({ ...state, [key]: value })
+      setState({ ...state, [key]: value });
     }
-  }
+  };
+
+  const [visible, setVisible] = useState(false);
 
   const {
     mainPosition,
@@ -40,8 +42,8 @@ export default function Demo({ language = "en", translate }) {
     offsetY,
     offsetX,
     arrow,
-    shadow
-  } = state
+    shadow,
+  } = state;
 
   const Component = ({ size, backgroundColor, children }) => {
     return (
@@ -54,7 +56,7 @@ export default function Demo({ language = "en", translate }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          fontSize: "16px"
+          fontSize: "16px",
         }}
       >
         {translate(children)}
@@ -75,7 +77,7 @@ export default function Demo({ language = "en", translate }) {
           overflow: "auto",
           position: "relative",
           borderRadius: "5px",
-          boxShadow: "inset 0 0 6px 0 #888"
+          boxShadow: "inset 0 0 6px 0 #888",
         }}
       >
         <div
@@ -84,7 +86,7 @@ export default function Demo({ language = "en", translate }) {
             height: "300%",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center"
+            justifyContent: "center",
           }}
         >
           <ElementPopper
@@ -93,12 +95,12 @@ export default function Demo({ language = "en", translate }) {
             element={
               <Component size="80" backgroundColor="red">
                 Refrence Element
-                </Component>
+              </Component>
             }
             popper={
               <Component size="110" backgroundColor="white">
                 Popper Element
-                </Component>
+              </Component>
             }
             arrow={arrow}
             popperShadow={shadow}
@@ -120,57 +122,59 @@ export default function Demo({ language = "en", translate }) {
               ["Top", "top"],
               ["Bottom", "bottom"],
               ["Left", "left"],
-              ["Right", "right"]
+              ["Right", "right"],
             ],
             value: mainPosition,
-            onChange: value => updateState("mainPosition", value)
+            onChange: (value) => updateState("mainPosition", value),
           },
           {
             title: "Relative Position",
             options: [
               ["Start", "start"],
               ["Center", "center"],
-              ["End", "end"]
+              ["End", "end"],
             ],
             value: relativePosition,
-            onChange: value => updateState("relativePosition", value)
+            onChange: (value) => updateState("relativePosition", value),
           },
           {
             title: "Fix Main Position",
             options: [
               ["Disable", "disable"],
-              ["Enable", "enable"]
+              ["Enable", "enable"],
             ],
             value: fixMainPosition ? "enable" : "disable",
-            onChange: value => updateState("fixMainPosition", value === "enable")
+            onChange: (value) =>
+              updateState("fixMainPosition", value === "enable"),
           },
           {
             title: "Fix Relative Position",
             options: [
               ["Disable", "disable"],
-              ["Enable", "enable"]
+              ["Enable", "enable"],
             ],
             value: fixRelativePosition ? "enable" : "disable",
-            onChange: value => updateState("fixRelativePosition", value === "enable")
+            onChange: (value) =>
+              updateState("fixRelativePosition", value === "enable"),
           },
           {
             title: "Arrow",
             options: [
               ["Disable", "disable"],
-              ["Enable", "enable"]
+              ["Enable", "enable"],
             ],
             value: arrow ? "enable" : "disable",
-            onChange: value => updateState("arrow", value === "enable")
+            onChange: (value) => updateState("arrow", value === "enable"),
           },
           {
             title: "Shadow",
             options: [
               ["Disable", "disable"],
-              ["Enable", "enable"]
+              ["Enable", "enable"],
             ],
             value: shadow ? "enable" : "disable",
-            onChange: value => updateState("shadow", value === "enable")
-          }
+            onChange: (value) => updateState("shadow", value === "enable"),
+          },
         ]}
       />
 
@@ -181,7 +185,7 @@ export default function Demo({ language = "en", translate }) {
             className="input full-width"
             type="number"
             value={offsetY}
-            onChange={e => updateState("offsetY", Number(e.target.value))}
+            onChange={(e) => updateState("offsetY", Number(e.target.value))}
             disabled={["left", "right"].includes(mainPosition)}
           />
         </div>
@@ -192,7 +196,7 @@ export default function Demo({ language = "en", translate }) {
             className="input full-width"
             type="number"
             value={offsetX}
-            onChange={e => updateState("offsetX", Number(e.target.value))}
+            onChange={(e) => updateState("offsetX", Number(e.target.value))}
             disabled={["top", "bottom"].includes(mainPosition)}
           />
         </div>
@@ -205,5 +209,5 @@ export default function Demo({ language = "en", translate }) {
         ))}
       </ul>
     </>
-  )
+  );
 }

@@ -1,19 +1,18 @@
-import React, { useRef, useState, useEffect } from "react"
-import ElementPopper from "../../../index"
+import React, { useRef, useState, useEffect } from "react";
+import ElementPopper from "../../../src/index";
 
 export default function (translate, language) {
-  const [values, setValues] = useState(["1", "2"])
-  const [values1, setValues1] = useState(["1", "2"])
+  const [values, setValues] = useState(["1", "2"]);
+  const [values1, setValues1] = useState(["1", "2"]);
 
   const multiSelect = {
     title: "Multi Select",
-    description: <>
-
-      <p>{translate("style.css:")}</p>
-      <pre>
-        <code className="language-css">
-          {
-            `.multi-select {
+    description: (
+      <>
+        <p>{translate("style.css:")}</p>
+        <pre>
+          <code className="language-css">
+            {`.multi-select {
   border-radius: 5px;
   font-size: 15px;
   min-width: 120px;
@@ -54,11 +53,11 @@ export default function (translate, language) {
 .multi-select .options .option:hover {
   background-color: dodgerblue;
   color: white;
-}`
-          }
-        </code>
-      </pre>
-    </>,
+}`}
+          </code>
+        </pre>
+      </>
+    ),
     code: `import React, { useRef, useState } from "react"
 import ElementPopper from "react-element-popper"
 
@@ -147,19 +146,21 @@ function MultiSelect({ options = [], values = [], onChange }) {
     if (onChange) onChange([...values])
   }
 }`,
-    jsx: <MultiSelect
-      values={values}
-      onChange={setValues}
-      options={[
-        [`${translate("option")} 1`, "1"],
-        [`${translate("option")} 2`, "2"],
-        [`${translate("option")} 3`, "3"],
-        [`${translate("option")} 4`, "4"],
-        [`${translate("option")} 5`, "5"]
-      ]}
-      translate={translate}
-    />
-  }
+    jsx: (
+      <MultiSelect
+        values={values}
+        onChange={setValues}
+        options={[
+          [`${translate("option")} 1`, "1"],
+          [`${translate("option")} 2`, "2"],
+          [`${translate("option")} 3`, "3"],
+          [`${translate("option")} 4`, "4"],
+          [`${translate("option")} 5`, "5"],
+        ]}
+        translate={translate}
+      />
+    ),
+  };
 
   const handleClickOutside = {
     title: "Handle Click Outside",
@@ -174,104 +175,111 @@ function MultiSelect({ options = [], values = [], onChange }) {
   document.addEventListener("click", handleClickOutside)
   return () => document.removeEventListener("click", handleClickOutside)
 }, [])`,
-    jsx: <MultiSelect
-      values={values1}
-      onChange={setValues1}
-      options={[
-        [`${translate("option")} 1`, "1"],
-        [`${translate("option")} 2`, "2"],
-        [`${translate("option")} 3`, "3"],
-        [`${translate("option")} 4`, "4"],
-        [`${translate("option")} 5`, "5"],
-      ]}
-      useClickOutside
-      translate={translate}
-    />
-  }
+    jsx: (
+      <MultiSelect
+        values={values1}
+        onChange={setValues1}
+        options={[
+          [`${translate("option")} 1`, "1"],
+          [`${translate("option")} 2`, "2"],
+          [`${translate("option")} 3`, "3"],
+          [`${translate("option")} 4`, "4"],
+          [`${translate("option")} 5`, "5"],
+        ]}
+        useClickOutside
+        translate={translate}
+      />
+    ),
+  };
 
-  return [
-    multiSelect,
-    handleClickOutside
-  ]
+  return [multiSelect, handleClickOutside];
 }
 
-function MultiSelect({ options = [], values = [], onChange, useClickOutside = false, translate }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const ref = useRef()
+function MultiSelect({
+  options = [],
+  values = [],
+  onChange,
+  useClickOutside = false,
+  translate,
+}) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const ref = useRef();
 
   useEffect(() => {
-    if (!useClickOutside) return
+    if (!useClickOutside) return;
 
     function handleClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) {
-        setIsMenuOpen(false)
+        setIsMenuOpen(false);
       }
     }
 
-    document.addEventListener("click", handleClickOutside)
-    return () => document.removeEventListener("click", handleClickOutside)
-  }, [useClickOutside])
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [useClickOutside]);
 
-  const mustSelectAll = values.length !== options.length
+  const mustSelectAll = values.length !== options.length;
 
   return (
     <ElementPopper
       ref={ref}
       containerClassName="multi-select"
-      element={(
-        <div
-          className="placeholder"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
+      element={
+        <div className="placeholder" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {translate("click here to select")}
         </div>
-      )}
-      popper={isMenuOpen && (
-        <div className="options" style={{ width: ref?.current?.clientWidth || "100px" }}>
-          <label className="option">
-            <input
-              type="checkbox"
-              checked={!mustSelectAll}
-              onChange={selectAll}
-            />
-            <span>{translate("select all")}</span>
-          </label>
-          {options.map(([text, value], index) => (
-            <label className="option" key={index}>
+      }
+      popper={
+        isMenuOpen && (
+          <div
+            className="options"
+            style={{ width: ref?.current?.clientWidth || "100px" }}
+          >
+            <label className="option">
               <input
                 type="checkbox"
-                value={value}
-                checked={values.includes(value)}
-                onChange={select}
+                checked={!mustSelectAll}
+                onChange={selectAll}
               />
-              <span>{text}</span>
+              <span>{translate("select all")}</span>
             </label>
-          ))}
-        </div>
-      )}
+            {options.map(([text, value], index) => (
+              <label className="option" key={index}>
+                <input
+                  type="checkbox"
+                  value={value}
+                  checked={values.includes(value)}
+                  onChange={select}
+                />
+                <span>{text}</span>
+              </label>
+            ))}
+          </div>
+        )
+      }
       offsetY={2}
     />
-  )
+  );
 
   function selectAll() {
     if (mustSelectAll) {
-      values = options.map(option => option[1])
+      values = options.map((option) => option[1]);
     } else {
-      values = []
+      values = [];
     }
 
-    if (onChange) onChange(values)
+    if (onChange) onChange(values);
   }
 
   function select(e) {
-    let value = e.target.value
+    let value = e.target.value;
 
     if (values.includes(value)) {
-      values = values.filter(val => val !== value)
+      values = values.filter((val) => val !== value);
     } else {
-      values.push(value)
+      values.push(value);
     }
 
-    if (onChange) onChange([...values])
+    if (onChange) onChange([...values]);
   }
 }
