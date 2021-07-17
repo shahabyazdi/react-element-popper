@@ -1,6 +1,6 @@
 /screenshot
 /website
+/src
 rollup.config.js
-index.js
 .github
 .gitignore

@@ -1,15 +1,18 @@
-import React, { useState } from "react"
-import ElementPopper from "../../../index"
+import React, { useState } from "react";
+import ElementPopper from "../../../src/index";
 
 export default function (translate, language) {
-  const [state, setState] = useState({})
-  const [state1, setState1] = useState(false)
+  const [state, setState] = useState({});
+  const [state1, setState1] = useState(false);
 
-  const updateState = number => setState1({ ...state1, [number]: !state1[number] })
+  const updateState = (number) =>
+    setState1({ ...state1, [number]: !state1[number] });
 
   const Button = ({ number }) => (
-    <button onClick={() => updateState(number)}>{translate("click here")}</button>
-  )
+    <button onClick={() => updateState(number)}>
+      {translate("click here")}
+    </button>
+  );
 
   const list = (
     <ul className="dropdown">
@@ -18,7 +21,7 @@ export default function (translate, language) {
       <li>{translate("item 3")}</li>
       <li>{translate("item 4")}</li>
     </ul>
-  )
+  );
 
   const mainList = (
     <div className="dropdown">
@@ -30,21 +33,25 @@ export default function (translate, language) {
         >
           <ElementPopper
             containerStyle={{
-              width: "120px"
+              width: "120px",
             }}
-            element={(
+            element={
               <>
-                <span>{translate("item")} {number}</span>
-                <span style={{ float: language === "en" ? "right" : "left" }}>{">"}</span>
+                <span>
+                  {translate("item")} {number}
+                </span>
+                <span style={{ float: language === "en" ? "right" : "left" }}>
+                  {">"}
+                </span>
               </>
-            )}
+            }
             popper={state["item" + number] && list}
             position={language === "en" ? "right-top" : "left-top"}
           />
         </div>
       ))}
     </div>
-  )
+  );
 
   const simpleExample = {
     title: "Simple Example",
@@ -58,7 +65,9 @@ export default function App() {
   const updateState = number => setState({ ...state, [number]: !state[number] })
 
   const Button = ({ number }) => (
-    <button onClick={() => updateState(number)}>${translate("click here")}</button>
+    <button onClick={() => updateState(number)}>${translate(
+      "click here"
+    )}</button>
   )
 
   return (
@@ -81,33 +90,42 @@ export default function App() {
     />
   )
 }`,
-    jsx: <ElementPopper
-      position={language === "en" ? "right" : "left"}
-      element={<Button number={1} />}
-      popper={state1[1] && (
-        <ElementPopper
-          position={language === "en" ? "right" : "left"}
-          element={<Button number={2} />}
-          popper={state1[2] && (
+    jsx: (
+      <ElementPopper
+        position={language === "en" ? "right" : "left"}
+        element={<Button number={1} />}
+        popper={
+          state1[1] && (
             <ElementPopper
               position={language === "en" ? "right" : "left"}
-              element={<Button number={3} />}
-              popper={state1[3] && <button>{translate("last one")}</button>}
+              element={<Button number={2} />}
+              popper={
+                state1[2] && (
+                  <ElementPopper
+                    position={language === "en" ? "right" : "left"}
+                    element={<Button number={3} />}
+                    popper={
+                      state1[3] && <button>{translate("last one")}</button>
+                    }
+                  />
+                )
+              }
             />
-          )}
-        />
-      )}
-    />
-  }
+          )
+        }
+      />
+    ),
+  };
 
   const dropdown = {
     title: "Nested DropDown",
-    description: <>
-      <p>{translate("nested_dropdown")}</p>
-      <p>{translate("style.css:")}</p>
-      <pre>
-        <code className="language-css">{
-          `.dropdown {
+    description: (
+      <>
+        <p>{translate("nested_dropdown")}</p>
+        <p>{translate("style.css:")}</p>
+        <pre>
+          <code className="language-css">
+            {`.dropdown {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -129,15 +147,13 @@ export default function App() {
 .dropdown div.item {
   cursor: pointer;
   height: 26px;
-}`
-        }
-        </code>
-      </pre>
-      <p>{translate("code")}:</p>
-      <pre>
-        <code className="language-jsx">
-          {
-            `import React, { useState } from "react"
+}`}
+          </code>
+        </pre>
+        <p>{translate("code")}:</p>
+        <pre>
+          <code className="language-jsx">
+            {`import React, { useState } from "react"
 import ElementPopper from "react-element-popper"
 
 export default function App() {
@@ -168,7 +184,9 @@ export default function App() {
             element={(
               <>
                 <span>${translate("item")} {number}</span>
-                <span style={{ float: "${language === "en" ? "right" : "left"}" }}>{">"}</span>
+                <span style={{ float: "${
+                  language === "en" ? "right" : "left"
+                }" }}>{">"}</span>
               </>
             )}
             popper={state["item" + number] && list}
@@ -192,28 +210,25 @@ export default function App() {
       position="${language === "en" ? "bottom-left" : "bottom-right"}"
     />
   )
-}`
+}`}
+          </code>
+        </pre>
+      </>
+    ),
+    jsx: (
+      <div style={{ marginBottom: "40px" }}>
+        <ElementPopper
+          element={
+            <button onClick={() => setState({ main: !state.main })}>
+              {translate("click here")}
+            </button>
           }
-        </code>
-      </pre>
-    </>,
-    jsx: <div style={{ marginBottom: "40px" }}>
-      <ElementPopper
-        element={(
-          <button
-            onClick={() => setState({ main: !state.main })}
-          >
-            {translate("click here")}
-          </button>
-        )}
-        popper={state.main && mainList}
-        position={language === "en" ? "bottom-left" : "bottom-right"}
-      />
-    </div>
-  }
+          popper={state.main && mainList}
+          position={language === "en" ? "bottom-left" : "bottom-right"}
+        />
+      </div>
+    ),
+  };
 
-  return [
-    simpleExample,
-    dropdown
-  ]
+  return [simpleExample, dropdown];
 }

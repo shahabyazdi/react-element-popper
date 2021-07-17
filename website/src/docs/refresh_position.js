@@ -1,19 +1,27 @@
-import React, { useState, useRef } from "react"
-import ElementPopper from "../../../index"
+import React, { useState, useRef } from "react";
+import ElementPopper from "../../../src/index";
 
 export default function (translate) {
-  const ref = useRef()
-  const [visible, setVisible] = useState(false)
-  const [visible2, setVisible2] = useState(false)
+  const ref = useRef();
+  const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
 
   const globalProps = {
-    element: <Component size={80} backgroundColor="red" translate={translate}>Refrence Element</Component>,
-    popper: <Component size={100} backgroundColor="white" translate={translate}>Popper Element</Component>,
+    element: (
+      <Component size={80} backgroundColor="red" translate={translate}>
+        Refrence Element
+      </Component>
+    ),
+    popper: (
+      <Component size={100} backgroundColor="white" translate={translate}>
+        Popper Element
+      </Component>
+    ),
     position: "bottom",
     fixMainPosition: true,
     popperShadow: true,
-    arrow: true
-  }
+    arrow: true,
+  };
 
   const refresh = {
     title: "Refreshing Position",
@@ -54,7 +62,9 @@ export default function App() {
     <div>
       <div style={{ marginBottom: "150px", padding: "0 10px" }}>
         <h2>${translate("Example 1 (without using refresh position)")} :</h2>
-        {visible && <span>${translate("a demo text to force the refrence element to move forward!")}</span>}
+        {visible && <span>${translate(
+          "a demo text to force the refrence element to move forward!"
+        )}</span>}
         <ElementPopper {...globalProps} />
         <button
           onClick={() => setVisible(!visible)}
@@ -65,7 +75,9 @@ export default function App() {
     
       <div style={{ marginBottom: "150px", padding: "0 10px" }}>
         <h2>${translate("Example 2 (with using refresh position)")} :</h2>
-        {visible2 && <span>${translate("a demo text to force the refrence element to move forward!")}</span>}
+        {visible2 && <span>${translate(
+          "a demo text to force the refrence element to move forward!"
+        )}</span>}
         <ElementPopper ref={ref} {...globalProps} />
         <button
           onClick={() => {
@@ -80,38 +92,48 @@ export default function App() {
     </div>
   )
 }`,
-    jsx: <div>
-      <div style={{ marginBottom: "150px", padding: "0 10px" }}>
-        <h2>{translate("Example 1 (without using refresh position)")} :</h2>
-        {visible && <span>{translate("a demo text to force the refrence element to move forward!")}</span>}
-        <ElementPopper {...globalProps} />
-        <button
-          onClick={() => setVisible(!visible)}
-        >
-          {visible ? translate("refresh") : translate("click here")}
-        </button>
+    jsx: (
+      <div>
+        <div style={{ marginBottom: "150px", padding: "0 10px" }}>
+          <h2>{translate("Example 1 (without using refresh position)")} :</h2>
+          {visible && (
+            <span>
+              {translate(
+                "a demo text to force the refrence element to move forward!"
+              )}
+            </span>
+          )}
+          <ElementPopper {...globalProps} />
+          <button onClick={() => setVisible(!visible)}>
+            {visible ? translate("refresh") : translate("click here")}
+          </button>
+        </div>
+
+        <div style={{ marginBottom: "150px", padding: "0 10px" }}>
+          <h2>{translate("Example 2 (with using refresh position)")} :</h2>
+          {visible2 && (
+            <span>
+              {translate(
+                "a demo text to force the refrence element to move forward!"
+              )}
+            </span>
+          )}
+          <ElementPopper ref={ref} {...globalProps} />
+          <button
+            onClick={() => {
+              setVisible2(!visible2);
+
+              ref.current.refreshPosition();
+            }}
+          >
+            {visible2 ? translate("refresh") : translate("click here")}
+          </button>
+        </div>
       </div>
+    ),
+  };
 
-      <div style={{ marginBottom: "150px", padding: "0 10px" }}>
-        <h2>{translate("Example 2 (with using refresh position)")} :</h2>
-        {visible2 && <span>{translate("a demo text to force the refrence element to move forward!")}</span>}
-        <ElementPopper ref={ref} {...globalProps} />
-        <button
-          onClick={() => {
-            setVisible2(!visible2)
-
-            ref.current.refreshPosition()
-          }}
-        >
-          {visible2 ? translate("refresh") : translate("click here")}
-        </button>
-      </div>
-    </div>
-  }
-
-  return [
-    refresh
-  ]
+  return [refresh];
 }
 
 function Component({ size, backgroundColor, children, translate }) {
@@ -125,10 +147,10 @@ function Component({ size, backgroundColor, children, translate }) {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        fontSize: "16px"
+        fontSize: "16px",
       }}
     >
       {translate(children)}
     </div>
-  )
+  );
 }

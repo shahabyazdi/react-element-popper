@@ -21,7 +21,7 @@ function ElementPopper(
     fixRelativePosition,
     offsetY,
     offsetX,
-    animation,
+    animations,
     zIndex = 0,
     popperShadow,
     onChange,
@@ -48,7 +48,7 @@ function ElementPopper(
         offsetY,
         offsetX,
         defaultArrow,
-        animation,
+        animations,
         zIndex,
         onChange,
       };
@@ -59,7 +59,7 @@ function ElementPopper(
       offsetY,
       offsetX,
       defaultArrow,
-      animation,
+      animations,
       onChange,
       zIndex,
     ]),
@@ -173,7 +173,7 @@ function setPosition(
     offsetY = 0,
     offsetX = 0,
     defaultArrow,
-    animation,
+    animations = [],
     zIndex,
     onChange,
   },
@@ -199,9 +199,8 @@ function setPosition(
     { clientHeight, clientWidth } = document.documentElement,
     popperContainer = popperRef.current.parentNode,
     [translateX, translateY] = getTranslate(popperContainer),
-    [mainPosition, relativePosition, vertical, horizontal] = splitPosition(
-      position
-    ),
+    [mainPosition, relativePosition, vertical, horizontal] =
+      splitPosition(position),
     currentMainPosition = mainPosition,
     getTransform = (x, y) => `translate(${x}px, ${y}px)`,
     lengthDifference = elementWidth - popperWidth,
@@ -233,9 +232,7 @@ function setPosition(
     arrowX = x,
     arrowY = y,
     arrowDirection,
-    mirror = { top: "bottom", bottom: "top", left: "right", right: "left" },
-    animationX = 0,
-    animationY = 0;
+    mirror = { top: "bottom", bottom: "top", left: "right", right: "left" };
 
   if (vertical) {
     x += leftCorner;
@@ -369,13 +366,8 @@ function setPosition(
   if (vertical) y += currentMainPosition === "bottom" ? offsetY : -offsetY;
   if (horizontal) x += currentMainPosition === "right" ? offsetX : -offsetX;
 
-  if (animation && !e) {
-    if (vertical) animationY = currentMainPosition === "bottom" ? 10 : -10;
-    if (horizontal) animationX = currentMainPosition === "right" ? 10 : -10;
-  }
-
-  x = x - distanceX + animationX;
-  y = y - distanceY + animationY;
+  x = x - distanceX;
+  y = y - distanceY;
 
   arrowDirection = mirror[currentMainPosition];
 
@@ -468,27 +460,8 @@ function setPosition(
   }
 
   popperContainer.style.transform = getTransform(x, y);
-  popperContainer.style.visibility = "visible";
 
-  if (!e && animation) {
-    setTimeout(() => {
-      popperContainer.style.transition = ".4s";
-      popperContainer.style.transform = getTransform(
-        x - animationX,
-        y - animationY
-      );
-
-      if (arrow) {
-        arrow.style.transition = ".4s";
-        arrow.style.transform = getTransform(
-          arrowX - animationX,
-          arrowY - animationY
-        );
-      }
-    }, 18);
-  }
-
-  onChange?.({
+  let data = {
     popper: {
       top: y,
       bottom: y + popperHeight,
@@ -519,7 +492,21 @@ function setPosition(
     scroll: { scrollLeft, scrollTop },
     scrollableParents,
     event: e,
-  });
+  };
+
+  if (!e) {
+    animations.forEach((animation) => {
+      animation({
+        popper: popperContainer,
+        arrow,
+        data: { ...data, getTransform, mirror },
+      });
+    });
+  }
+
+  popperContainer.style.visibility = "visible";
+
+  onChange?.(data);
 }
 
 function getScroll() {
@@ -588,9 +575,8 @@ function getScrollableParent(element) {
 }
 
 function splitPosition(position) {
-  let [mainPosition = "bottom", relativePosition = "center"] = position.split(
-    "-"
-  );
+  let [mainPosition = "bottom", relativePosition = "center"] =
+    position.split("-");
 
   if (mainPosition === "auto") mainPosition = "bottom";
   if (relativePosition === "auto") relativePosition = "center";

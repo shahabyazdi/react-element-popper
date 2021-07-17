@@ -1,16 +1,16 @@
-import React, { useState, useRef, useEffect } from "react"
-import ElementPopper from "../../../index"
+import React, { useState, useRef, useEffect } from "react";
+import ElementPopper from "../../../src/index";
 
 export default function (translate, language) {
   const navbar = {
     title: "NavBar",
-    description: <>
-      <NavBar />
-      <p>{translate("style.css:")}</p>
-      <pre>
-        <code className="language-css">
-          {
-            `.nested-navbar {
+    description: (
+      <>
+        <NavBar />
+        <p>{translate("style.css:")}</p>
+        <pre>
+          <code className="language-css">
+            {`.nested-navbar {
   height: 55px;
   background-color: rgb(146, 146, 221);
   display: flex;
@@ -53,14 +53,12 @@ export default function (translate, language) {
           
 .items .item span {
   float: right;
-}`
-          }
-        </code>
-      </pre>
-      <pre>
-        <code className="language-jsx">
-          {
-            `function NavBar() {
+}`}
+          </code>
+        </pre>
+        <pre>
+          <code className="language-jsx">
+            {`function NavBar() {
   const [navItem, setNavItem] = useState("")
   const navBarRef = useRef()
           
@@ -243,41 +241,36 @@ export default function (translate, language) {
       setSubMenu(name)
     }
   }
-}`
-          }
-        </code>
-      </pre>
-    </>
-  }
+}`}
+          </code>
+        </pre>
+      </>
+    ),
+  };
 
-
-  return [
-    navbar
-  ]
+  return [navbar];
 }
 
 function NavBar() {
-  const [navItem, setNavItem] = useState("")
-  const navBarRef = useRef()
+  const [navItem, setNavItem] = useState("");
+  const navBarRef = useRef();
 
   useEffect(() => {
     function handleClickOutSide(e) {
       if (
-        (
-          navBarRef.current &&
+        (navBarRef.current &&
           !navBarRef.current.contains(e.target) &&
-          !e.target.classList.contains("navbar-item")
-        ) ||
+          !e.target.classList.contains("navbar-item")) ||
         e.target.classList.contains("navbar")
       ) {
-        setNavItem("")
+        setNavItem("");
       }
     }
 
-    document.addEventListener("click", handleClickOutSide)
+    document.addEventListener("click", handleClickOutSide);
 
-    return () => document.removeEventListener("click", handleClickOutSide)
-  }, [])
+    return () => document.removeEventListener("click", handleClickOutSide);
+  }, []);
 
   const items = {
     home: [
@@ -292,13 +285,13 @@ function NavBar() {
               { name: "sub item 3" },
               { name: "sub item 4" },
               { name: "sub item 5" },
-              { name: "sub item 6" }
-            ]
+              { name: "sub item 6" },
+            ],
           },
           { name: "sub item 2" },
           { name: "sub item 3" },
-          { name: "sub item 4" }
-        ]
+          { name: "sub item 4" },
+        ],
       },
       {
         name: "item 2",
@@ -308,11 +301,11 @@ function NavBar() {
           { name: "sub item 3" },
           { name: "sub item 4" },
           { name: "sub item 5" },
-          { name: "sub item 6" }
-        ]
+          { name: "sub item 6" },
+        ],
       },
       { name: "item 3" },
-      { name: "item 4" }
+      { name: "item 4" },
     ],
     store: [
       { name: "item 1" },
@@ -324,12 +317,12 @@ function NavBar() {
           { name: "sub item 1" },
           { name: "sub item 2" },
           { name: "sub item 3" },
-          { name: "sub item 4" }
-        ]
-      }
+          { name: "sub item 4" },
+        ],
+      },
     ],
     docs: [
-      { name: "item 1", },
+      { name: "item 1" },
       {
         name: "item 2",
         childs: [
@@ -338,14 +331,12 @@ function NavBar() {
           { name: "sub item 3" },
           {
             name: "sub item 4",
-            childs: [
-              { name: "sub item 1" }
-            ]
-          }
-        ]
+            childs: [{ name: "sub item 1" }],
+          },
+        ],
       },
       { name: "item 3" },
-      { name: "item 4" }
+      { name: "item 4" },
     ],
     about: [
       {
@@ -354,22 +345,19 @@ function NavBar() {
           { name: "sub item 1" },
           { name: "sub item 2" },
           { name: "sub item 3" },
-          { name: "sub item 4" }
-        ]
+          { name: "sub item 4" },
+        ],
       },
       { name: "item 2" },
       { name: "item 3" },
-      { name: "item 4" }
-    ]
-  }
+      { name: "item 4" },
+    ],
+  };
 
-  const itemNames = Object.keys(items)
+  const itemNames = Object.keys(items);
 
   return (
-    <div
-      ref={navBarRef}
-      className="nested-navbar"
-    >
+    <div ref={navBarRef} className="nested-navbar">
       {itemNames.map((name, index) => {
         return (
           <ElementPopper
@@ -378,66 +366,64 @@ function NavBar() {
             popper={navItem === name && <List items={items[name]} />}
             containerStyle={{ margin: "auto 0" }}
             offsetY={12}
-            position={index === 0 ? "bottom-left" : index === (itemNames.length - 1) ? "bottom-right" : "bottom-center"}
+            position={
+              index === 0
+                ? "bottom-left"
+                : index === itemNames.length - 1
+                ? "bottom-right"
+                : "bottom-center"
+            }
             fixMainPosition
           />
-        )
+        );
       })}
     </div>
-  )
+  );
 
   function NavItem({ name }) {
     return (
-      <div
-        className="navbar-item"
-        onClick={toggleVisible}
-      >
+      <div className="navbar-item" onClick={toggleVisible}>
         {name}
       </div>
-    )
+    );
 
     function toggleVisible() {
-      setNavItem(navItem === name ? "" : name)
+      setNavItem(navItem === name ? "" : name);
     }
   }
 
   function List({ items }) {
-    const [subMenu, setSubMenu] = useState("")
+    const [subMenu, setSubMenu] = useState("");
 
     return (
       <div className="items">
         {items.map((item, i) => {
-          return (item.childs ?
+          return item.childs ? (
             <ElementPopper
               key={i}
               element={<Item item={item} />}
               popper={subMenu === item.name && <List items={item.childs} />}
               containerStyle={{ width: "100%" }}
               position="right-top"
-            /> :
-            <Item
-              key={i}
-              item={item}
             />
-          )
+          ) : (
+            <Item key={i} item={item} />
+          );
         })}
       </div>
-    )
+    );
 
     function Item({ item }) {
       return (
-        <div
-          className="item"
-          onMouseOver={() => openSubMenu(item.name)}
-        >
+        <div className="item" onMouseOver={() => openSubMenu(item.name)}>
           {item.name}
           {item.childs && <span>{">"}</span>}
         </div>
-      )
+      );
     }
 
     function openSubMenu(name) {
-      setSubMenu(name)
+      setSubMenu(name);
     }
   }
 }
