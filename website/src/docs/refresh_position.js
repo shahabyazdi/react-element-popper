@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import ElementPopper from "../../../src/index";
 
-export default function (translate) {
+export default function Doc(translate) {
   const ref = useRef();
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);

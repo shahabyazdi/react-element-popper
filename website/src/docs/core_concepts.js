@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ElementPopper from "../../../src/index";
 
-export default function (translate, language) {
+export default function Doc(translate, language) {
   const [elementCenter, setElementCenter] = useState(100);
   const elementRef = useRef();
   const parentRef = useRef();

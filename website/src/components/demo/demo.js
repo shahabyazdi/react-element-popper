@@ -32,8 +32,6 @@ export default function Demo({ language = "en", translate }) {
     }
   };
 
-  const [visible, setVisible] = useState(false);
-
   const {
     mainPosition,
     relativePosition,

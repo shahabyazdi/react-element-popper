@@ -12,6 +12,7 @@ const presets = ["@babel/preset-react", "@babel/preset-env"];
 
 const globals = {
   react: "React",
+  "react-dom": "ReactDOM",
 };
 
 export default [

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import ElementPopper from "../../../src/index";
 
-export default function (translate, language) {
+export default function Doc(translate, language) {
   const navbar = {
     title: "NavBar",
     description: (
@@ -382,7 +382,13 @@ function NavBar() {
 
   function NavItem({ name }) {
     return (
-      <div className="navbar-item" onClick={toggleVisible}>
+      <div
+        className="navbar-item"
+        onClick={toggleVisible}
+        onKeyDown={toggleVisible}
+        role="button"
+        tabIndex="0"
+      >
         {name}
       </div>
     );
