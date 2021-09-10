@@ -92,8 +92,13 @@ function ElementPopper(
       },
     };
 
-  if (isBrowser && !isValidPortalTarget && !div.current) {
+  if (isBrowser && !div.current) {
     div.current = document.createElement("div");
+    /**
+     * This data will be used only in very rare cases
+     * in which the user wants to toggle the portal without closing the popper.
+     */
+    div.current.data = { portal, isValidPortalTarget };
   }
 
   useEffect(() => {
@@ -137,10 +142,18 @@ function ElementPopper(
   }, [isPopper, options, removeTransition]);
 
   useEffect(() => {
-    if (!isPopper) return;
+    let data = { portal, isValidPortalTarget };
+    let prevData = div.current.data;
 
+    if (JSON.stringify(data) === JSON.stringify(prevData)) return;
+    /**
+     * If the user wants to implement a layout in which
+     * the portal value is toggling without closing the popper,
+     * the above condition will break and the popper position will be refresh.
+     */
+    div.current.data = data;
     elementRef.current.refreshPosition();
-  }, [portal, isValidPortalTarget, isPopper]);
+  }, [portal, isValidPortalTarget]);
 
   const node = (
     <>
