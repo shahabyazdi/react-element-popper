@@ -136,10 +136,11 @@ function ElementPopper(
     };
   }, [isPopper, options, removeTransition]);
 
-  useEffect(
-    () => elementRef.current.refreshPosition(),
-    [portal, isValidPortalTarget]
-  );
+  useEffect(() => {
+    if (!isPopper) return;
+
+    elementRef.current.refreshPosition();
+  }, [portal, isValidPortalTarget, isPopper]);
 
   const node = (
     <>
