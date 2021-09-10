@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ElementPopper from "../../../src/index";
 
-export default function (translate, language) {
+export default function Doc(translate, language) {
   const [active, setActive] = useState(false);
   const [active1, setActive1] = useState(false);
   const [active2, setActive2] = useState(false);

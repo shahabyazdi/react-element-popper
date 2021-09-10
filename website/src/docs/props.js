@@ -1,6 +1,6 @@
-import React from "react"
+import React from "react";
 
-export default function (translate) {
+export default function Doc(translate) {
   const props = {
     title: "Props",
     description: (
@@ -105,8 +105,8 @@ export default function (translate) {
           </tr>
         </tbody>
       </table>
-    )
-  }
+    ),
+  };
 
   const positions = {
     title: "Positions",
@@ -170,11 +170,8 @@ export default function (translate) {
           </tr>
         </tbody>
       </table>
-    )
-  }
+    ),
+  };
 
-  return [
-    props,
-    positions
-  ]
+  return [props, positions];
 }

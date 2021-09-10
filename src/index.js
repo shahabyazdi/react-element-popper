@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import React, {
   useRef,
   useEffect,
@@ -5,6 +6,7 @@ import React, {
   useMemo,
   useCallback,
   isValidElement,
+  cloneElement,
 } from "react";
 
 function ElementPopper(
@@ -26,22 +28,21 @@ function ElementPopper(
     popperShadow,
     onChange,
     active = true,
+    portal,
+    portalTarget,
   },
   outerRef
 ) {
-  const elementRef = useRef(),
+  const isBrowser = typeof window !== "undefined",
+    isValidPortalTarget = isBrowser && portalTarget instanceof HTMLElement,
+    defaultArrow = arrow === true,
+    isPopper = popper && active === true,
+    elementRef = useRef(),
     popperRef = useRef(),
     arrowRef = useRef(),
-    defaultArrowStyle = {
-      visibility: "hidden",
-      left: "0",
-      top: "0",
-      position: "absolute",
-    },
-    defaultArrow = useMemo(() => arrow === true, [arrow]),
-    isPopper = useMemo(() => popper && active === true, [popper, active]),
-    getOptions = useCallback(() => {
-      return {
+    div = useRef(),
+    options = useMemo(
+      () => ({
         position,
         fixMainPosition,
         fixRelativePosition,
@@ -51,22 +52,59 @@ function ElementPopper(
         animations,
         zIndex,
         onChange,
-      };
-    }, [
-      position,
-      fixMainPosition,
-      fixRelativePosition,
-      offsetY,
-      offsetX,
-      defaultArrow,
-      animations,
-      onChange,
-      zIndex,
-    ]),
+      }),
+      [
+        position,
+        fixMainPosition,
+        fixRelativePosition,
+        offsetY,
+        offsetX,
+        defaultArrow,
+        animations,
+        onChange,
+        zIndex,
+      ]
+    ),
     removeTransition = useCallback(() => {
       if (arrowRef.current) arrowRef.current.style.transition = "";
       if (popperRef.current) popperRef.current.parentNode.style.transition = "";
-    }, []);
+    }, []),
+    styles = {
+      element: {
+        display: "inline-block",
+        height: "max-content",
+        ...containerStyle,
+      },
+      arrow: {
+        visibility: "hidden",
+        left: "0",
+        top: "0",
+        position: "absolute",
+        ...arrowStyle,
+      },
+      popper: {
+        position: "absolute",
+        left: "0",
+        top: "0",
+        willChange: "transform",
+        visibility: "hidden",
+        zIndex,
+      },
+    };
+
+  if (isBrowser && !isValidPortalTarget && !div.current) {
+    div.current = document.createElement("div");
+  }
+
+  useEffect(() => {
+    if (!portal || isValidPortalTarget) return;
+
+    const portalDiv = div.current;
+
+    document.body.appendChild(portalDiv);
+
+    return () => document.body.removeChild(portalDiv);
+  }, [portal, isValidPortalTarget]);
 
   useEffect(() => {
     if (!isPopper) {
@@ -86,7 +124,7 @@ function ElementPopper(
         return;
       if (e) removeTransition();
 
-      setPosition(elementRef, popperRef, arrowRef, getOptions(), e);
+      setPosition(elementRef, popperRef, arrowRef, options, e);
     }
 
     document.addEventListener("scroll", updatePosition, true);
@@ -96,68 +134,73 @@ function ElementPopper(
       document.removeEventListener("scroll", updatePosition, true);
       window.removeEventListener("resize", updatePosition);
     };
-  }, [isPopper, getOptions, removeTransition]);
+  }, [isPopper, options, removeTransition]);
+
+  const node = (
+    <>
+      {renderArrow()}
+      {renderPopper()}
+    </>
+  );
 
   return (
-    <div
-      ref={(element) => {
-        if (element) {
-          element.removeTransition = removeTransition;
-          element.refreshPosition = () =>
-            setTimeout(
-              () =>
-                setPosition(
-                  elementRef,
-                  popperRef,
-                  arrowRef,
-                  getOptions(),
-                  {} //To prevent animation
-                ),
-              10
-            );
-        }
-
-        elementRef.current = element;
-
-        if (outerRef instanceof Function) return outerRef(element);
-        if (outerRef) outerRef.current = element;
-      }}
-      className={containerClassName}
-      style={{
-        display: "inline-block",
-        height: "max-content",
-        ...containerStyle,
-      }}
-    >
+    <div ref={setRef} className={containerClassName} style={styles.element}>
       {element}
-      {arrow === true && isPopper ? (
-        <div
-          ref={arrowRef}
-          className={`ep-arrow ${
-            popperShadow ? "ep-shadow" : ""
-          } ${arrowClassName}`}
-          style={{ ...defaultArrowStyle, ...arrowStyle }}
-        ></div>
-      ) : isValidElement(arrow) && isPopper ? (
-        <div ref={arrowRef} style={{ ...defaultArrowStyle, ...arrowStyle }}>
-          {arrow}
-        </div>
-      ) : null}
+      {portal && isBrowser
+        ? createPortal(node, isValidPortalTarget ? portalTarget : div.current)
+        : node}
+    </div>
+  );
+
+  function setRef(element) {
+    if (element) {
+      element.removeTransition = removeTransition;
+      element.refreshPosition = () =>
+        setTimeout(
+          () =>
+            setPosition(
+              elementRef,
+              popperRef,
+              arrowRef,
+              options,
+              {} //To prevent animation
+            ),
+          10
+        );
+    }
+
+    elementRef.current = element;
+
+    if (outerRef instanceof Function) return outerRef(element);
+    if (outerRef) outerRef.current = element;
+  }
+
+  function renderArrow() {
+    let div = (
+      <div
+        ref={arrowRef}
+        style={styles.arrow}
+        className={`ep-arrow ${
+          popperShadow ? "ep-shadow" : ""
+        } ${arrowClassName}`}
+      />
+    );
+
+    return arrow && isPopper
+      ? cloneElement(div, isValidElement(arrow) ? { children: arrow } : {})
+      : null;
+  }
+
+  function renderPopper() {
+    return (
       <div
         className={popperShadow ? "ep-popper-shadow" : ""}
-        style={{
-          position: "absolute",
-          left: "0",
-          top: "0",
-          willChange: "transform",
-          visibility: "hidden",
-          zIndex,
-        }}
+        style={styles.popper}
       >
         <div ref={popperRef}>{popper}</div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default forwardRef(ElementPopper);

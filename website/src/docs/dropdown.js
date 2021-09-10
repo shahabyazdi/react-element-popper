@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ElementPopper from "../../../src/index";
 
-export default function (translate, language, Code) {
+export default function Doc(translate, language, Code) {
   const [state, setState] = useState({});
 
   const updateState = (number) =>

@@ -64,6 +64,8 @@ declare module "react-element-popper" {
      */
     zIndex?: number;
     popperShadow?: boolean;
+    portal?: boolean;
+    portalTarget?: HTMLElement;
     onChange?(data: {
       popper: {
         top: number;

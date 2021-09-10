@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import ElementPopper from "../../../src/index";
 
-export default function (translate, language) {
+export default function Doc(translate, language) {
   const [values, setValues] = useState(["1", "2"]);
   const [values1, setValues1] = useState(["1", "2"]);
 
@@ -220,12 +220,22 @@ function MultiSelect({
 
   const mustSelectAll = values.length !== options.length;
 
+  function toggleMenu() {
+    setIsMenuOpen(!isMenuOpen);
+  }
+
   return (
     <ElementPopper
       ref={ref}
       containerClassName="multi-select"
       element={
-        <div className="placeholder" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <div
+          className="placeholder"
+          onClick={toggleMenu}
+          onKeyDown={toggleMenu}
+          role="button"
+          tabIndex="0"
+        >
           {translate("click here to select")}
         </div>
       }
