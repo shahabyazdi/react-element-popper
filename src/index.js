@@ -554,7 +554,7 @@ function setPosition(
 
   popperContainer.style.visibility = "visible";
 
-  onChange?.(data);
+  if (typeof onChange === "function") onChange(data);
 }
 
 function getScroll() {
