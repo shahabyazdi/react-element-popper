@@ -35,12 +35,12 @@ function ElementPopper(
 ) {
   const isBrowser = typeof window !== "undefined",
     isValidPortalTarget = isBrowser && portalTarget instanceof HTMLElement,
+    defaultArrow = arrow === true,
+    isPopper = popper && active === true,
     elementRef = useRef(),
     popperRef = useRef(),
     arrowRef = useRef(),
     div = useRef(),
-    defaultArrow = arrow === true,
-    isPopper = popper && active === true,
     options = useMemo(
       () => ({
         position,
@@ -93,7 +93,6 @@ function ElementPopper(
     };
 
   if (isBrowser && !isValidPortalTarget && !div.current) {
-    console.log("div.current nist");
     div.current = document.createElement("div");
   }
 
