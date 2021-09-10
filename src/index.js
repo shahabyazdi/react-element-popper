@@ -29,14 +29,16 @@ function ElementPopper(
     onChange,
     active = true,
     portal,
+    portalTarget,
   },
   outerRef
 ) {
-  const elementRef = useRef(),
+  const isBrowser = typeof window !== "undefined",
+    isValidPortalTarget = isBrowser && portalTarget instanceof HTMLElement,
+    elementRef = useRef(),
     popperRef = useRef(),
     arrowRef = useRef(),
-    isBrowser = typeof window !== "undefined",
-    div = useRef(isBrowser ? document.createElement("div") : null),
+    div = useRef(),
     defaultArrow = arrow === true,
     isPopper = popper && active === true,
     options = useMemo(
@@ -90,15 +92,20 @@ function ElementPopper(
       },
     };
 
+  if (isBrowser && !isValidPortalTarget && !div.current) {
+    console.log("div.current nist");
+    div.current = document.createElement("div");
+  }
+
   useEffect(() => {
-    if (!portal) return;
+    if (!portal || isValidPortalTarget) return;
 
     const portalDiv = div.current;
 
     document.body.appendChild(portalDiv);
 
     return () => document.body.removeChild(portalDiv);
-  }, [portal]);
+  }, [portal, isValidPortalTarget]);
 
   useEffect(() => {
     if (!isPopper) {
@@ -140,7 +147,9 @@ function ElementPopper(
   return (
     <div ref={setRef} className={containerClassName} style={styles.element}>
       {element}
-      {portal && isBrowser ? createPortal(node, div.current) : node}
+      {portal && isBrowser
+        ? createPortal(node, isValidPortalTarget ? portalTarget : div.current)
+        : node}
     </div>
   );
 
