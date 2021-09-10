@@ -136,6 +136,11 @@ function ElementPopper(
     };
   }, [isPopper, options, removeTransition]);
 
+  useEffect(
+    () => elementRef.current.refreshPosition(),
+    [portal, isValidPortalTarget]
+  );
+
   const node = (
     <>
       {renderArrow()}
