@@ -91,6 +91,8 @@ export default function Example() {
 | arrowClassName      |            String             |                 |
 | ref                 |        React.RefObject        |                 |
 | onChange            |           Function            |                 |
+| portal              |            Boolean            |      false      |
+| portalTarget        |          HTMLElement          |                 |
 
 ## Availble Positions
 

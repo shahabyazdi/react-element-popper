@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import Selectors from "../selectors/selectors";
 import ElementPopper from "../../../../src/index";
 import "./demo.css";
-import "../../../../build/element_popper.css";
 
 export default function Demo({ language = "en", translate }) {
   const [state, setState] = useState({
