@@ -44,9 +44,9 @@ export default function Doc(translate) {
             <td>false</td>
           </tr>
           <tr>
-            <td>animation</td>
-            <td>Boolean</td>
-            <td>false</td>
+            <td>animations</td>
+            <td>Array</td>
+            <td></td>
           </tr>
           <tr>
             <td>popperShadow</td>
@@ -101,6 +101,16 @@ export default function Doc(translate) {
           <tr>
             <td>onChange</td>
             <td>Function</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>portal</td>
+            <td>Boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>portalTarget</td>
+            <td>HTMLElement</td>
             <td></td>
           </tr>
         </tbody>

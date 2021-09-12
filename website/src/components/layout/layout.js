@@ -13,6 +13,7 @@ import useClickOutSide from "./useClickOutside";
 import "./layout.css";
 import "./multi_select.css";
 import "./navbar.css";
+import "../../../../build/element_popper.css";
 
 import "prismjs/components/prism-jsx.min";
 import "prismjs/themes/prism-okaidia.css";
@@ -24,6 +25,7 @@ const sidebar = {
     { name: "Props & Positions", path: "props/" },
     { name: "Core Concepts", path: "core-concepts/" },
     { name: "Active Prop", path: "active-prop/" },
+    { name: "Portal", path: "portal/" },
     { name: "Refreshing Position", path: "refresh-position/" },
     { name: "Creating DropDown", path: "dropdown/" },
     { name: "Nested DropDown", path: "nested-dropdown/" },

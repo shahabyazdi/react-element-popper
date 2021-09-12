@@ -195,19 +195,18 @@ function ElementPopper(
   }
 
   function renderArrow() {
-    let div = (
-      <div
-        ref={arrowRef}
-        style={styles.arrow}
-        className={`ep-arrow ${
-          popperShadow ? "ep-shadow" : ""
-        } ${arrowClassName}`}
-      />
-    );
+    if (!arrow || !isPopper) return null;
 
-    return arrow && isPopper
-      ? cloneElement(div, isValidElement(arrow) ? { children: arrow } : {})
-      : null;
+    let div = <div ref={arrowRef} style={styles.arrow} />;
+    let props = isValidElement(arrow)
+      ? { children: arrow }
+      : {
+          className: `ep-arrow ${
+            popperShadow ? "ep-shadow" : ""
+          } ${arrowClassName}`,
+        };
+
+    return cloneElement(div, props);
   }
 
   function renderPopper() {
