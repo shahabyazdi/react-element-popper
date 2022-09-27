@@ -1,6 +1,8 @@
 export default function opacity({ from = 0, to = 1, duration = 400 } = {}) {
   if (from < 0) from = 0;
+  if (from > 1) from = 1;
   if (to > 1) to = 1;
+  if (to < 0) to = 0;
 
   return function ({ popper, arrow }) {
     popper.style.opacity = from;
